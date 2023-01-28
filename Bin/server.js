@@ -23,7 +23,8 @@ app.set('port', port);
 //error handler
 function onError(error){
     if(error.syscall !== 'listen'){
-        throw error;
+        // throw error;
+        console.info(error);
     }
 
     const bind = typeof port === 'string' ? `Pipe ${port}` : `Port ${port}`;
@@ -38,7 +39,9 @@ function onError(error){
             process.exit(1);
         
         default:
-            throw error;
+            // throw error;
+            console.info(error);
+
 
     }
 }
