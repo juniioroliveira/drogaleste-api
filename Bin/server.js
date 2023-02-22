@@ -3,6 +3,7 @@ const http = require('http');
 const debug = require('debug')('nodestr:server');
 const config = require('./config.json');
 
+
 //PORT //based on express-generator
 function normalizePort(val){
     const port = parseInt(val, 10);
@@ -59,4 +60,4 @@ const server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
-console.log(`API is alive on ${port}!`);
+console.log(`API is alive on ${port}!`); 
