@@ -9,7 +9,7 @@ router.get('/', (req, res, next) => {
 
   reportLog('Processo: Solicitação de status da api')
     res.status(200).send({
-      title: 'DrogalesteAPI',
+      title: 'Drogaleste-API',
       version: package.version,
       status: 'Operando'
     });
