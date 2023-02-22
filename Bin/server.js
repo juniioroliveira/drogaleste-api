@@ -1,6 +1,7 @@
 const app = require('../Src/index');
 const http = require('http');
 const debug = require('debug')('nodestr:server');
+const config = require('./config.json');
 
 //PORT //based on express-generator
 function normalizePort(val){
@@ -17,7 +18,7 @@ function normalizePort(val){
     return false;
 }
 
-const port = normalizePort(process.env.PORT || 3000);
+const port = normalizePort(process.env.PORT || config.porta);
 app.set('port', port);
 
 //error handler

@@ -1,0 +1,17 @@
+{
+    "SolicitacaoIncorreta":          400,
+    "NaoAutorizado":                 401,
+    "Proibido":                      403,
+    "NaoEncontrado":                 404,
+    "MetodoNaoPermitido":            405,
+    "NaoAceitavel":                  406,
+    "TempoLimiteDaSolicitacao":      408 ,
+    "Conflito":                      409,
+    "FalhaNaPreCondicao":            412,
+    "SolicitacoesEmExcesso":         429,
+    "ErroInternoDoTerminal":         500,
+    "NaoImplementado":               501,
+    "GatewayInvalido":               502,
+    "ServicoNaoDisponivel":          503,
+    "TempoLimiteDoGateway":          504
+}

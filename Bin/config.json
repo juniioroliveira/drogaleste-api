@@ -1,0 +1,69 @@
+{
+    "enableCredential": true,
+    "secretKey": "A@fderwfQQSDXCCer34",
+    "expireToken": 1800,
+    "porta": 7150,
+    "hostMail": [
+        {
+            "email": "outlook",
+            "host": "smtp-mail.outlook.com",
+            "port": 587,
+            "secure": false,
+            "auth":{
+                "user": "junioroliveira.la@hotmail.com",
+                "pass": "ti873562"
+            }
+        },
+        {
+            "email": "webmail",
+            "host": "email-ssl.com.br",
+            "port": 465,
+            "secure": true,
+            "auth":{
+                "user": "no-reply@rededrogaleste.com.br",
+                "pass": "#Drogaleste2023"
+            },
+            "copy": "junioroliveira.la@hotmail.com, bruno.santana@rededrogaleste.com.br"
+        },
+        {
+            "email": "gmail",
+            "host": "smtp.gmail.com",
+            "port": 587,
+            "secure": false,
+            "auth":{
+                "user": "bytesoft.tec@hotmail.com",
+                "pass": "ti873562"
+            }
+        }
+    ],
+    "strConn": [
+        {
+            "user": "procfit.drogaleste",
+            "password": "Pr0cf1t@dr#g@l!st!5",
+            "server": "drogaleste.procfit.com.br",
+            "database": "PBS_DROGALESTE_DADOS",
+            "port": 1433,
+            "dialect": "mssql",
+            "dialectOptions":{
+                "instanceName": ""
+            },
+            "options": {
+                "encrypt": false
+            }
+        },
+        {
+            "user": "drogaleste.junior",
+            "password": "Ti873562",
+            "server": "drogaleste.procfit.com.br",
+            "database": "PBS_DROGALESTE_DADOS",
+            "port": 1433,
+            "dialect": "mssql",
+            "dialectOptions":{
+                "instanceName": ""
+            },
+            "options": {
+                "encrypt": false
+            }
+        }
+    ]
+}
