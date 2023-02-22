@@ -13,7 +13,7 @@ async function execSQLDrogalesteQuery(script, res){
     let messageSucess;
     let messageError;
     let response; 
-    
+     
     sql.connect(strConn)
         .then(async conn => {
            response = await conn.request()
