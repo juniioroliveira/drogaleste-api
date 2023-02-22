@@ -13,7 +13,7 @@ router.get('/', (req, res, next) => {
       version: package.version,
       status: 'Operando'
     });
-  });
+  }); 
   
 module.exports = router;
 
