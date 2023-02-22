@@ -3,12 +3,16 @@ const bodyParser = require('body-parser');
 const rateLimit = require('express-rate-limit')
 const listEndpoints = require('express-list-endpoints')
 
-
-// const swaggerUi = require('swagger-ui-express')
-// const swaggerFile = require('./swagger_output.json')
-
-
 const app = express();
+
+
+/////////////////Gera documentação Swagger/////////////////////////////////////////////////
+const swaggerUi = require('swagger-ui-express')
+const swaggerFile = require('../swagger_output.json')
+
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+//////////////////////////////////////////////////////////////////////////////////////////
+
 
 const  limiter  =  rateLimit ( { 
 	windowMs : 1000,//15  *  60  *  1000 ,  // 15 minutos 
@@ -24,7 +28,7 @@ app.use(limiter)
 app.use(bodyParser.json())
 
 //////////////////////// Load route autenticação //////////////////////////
-const drogalesteAutentication = require('./Routes/Drogaleste/02 - oAuth')
+const drogalesteAutentication = require('./Routes/Drogaleste/oAuth')
 app.use('/api/oauth', drogalesteAutentication);
 ///////////////////////////////////////////////////////////////////////////
 
@@ -32,30 +36,29 @@ app.use('/api/oauth', drogalesteAutentication);
 ///////////////////////////////////////////////////////////////////////////
 ////////////////////// Load routes DrogalesteAPI //////////////////////////
 ///////////////////////////////////////////////////////////////////////////
-const drogalesteStatus = require('./Routes/Drogaleste/01 - status');
+const drogalesteStatus = require('./Routes/Drogaleste/status');
 app.use('/api/status', drogalesteStatus);
 
-const drogalesteUser = require('./Routes/Drogaleste/08 - user');
+const drogalesteUser = require('./Routes/Drogaleste/User');
 app.use('/api/user', drogalesteUser);
 
-const drogalesteClient = require('./Routes/Drogaleste/04 - client');
+const drogalesteClient = require('./Routes/Drogaleste/client');
 app.use('/api/drogaleste/client', drogalesteClient);
 
-const drogalesteProduct = require('./Routes/Drogaleste/05 - product');
+const drogalesteProduct = require('./Routes/Drogaleste/product');
 app.use('/api/drogaleste/product', drogalesteProduct);
 
-const drogalesteStore = require('./Routes/Drogaleste/03 - store');
+const drogalesteStore = require('./Routes/Drogaleste/store');
 app.use('/api/drogaleste/store', drogalesteStore);
 
-const drogalestePromotions = require('./Routes/Drogaleste/06 - promotions');
+const drogalestePromotions = require('./Routes/Drogaleste/promotions');
 app.use('/api/drogaleste/promotions', drogalestePromotions);
 
-const drogalesteSales = require('./Routes/Drogaleste/07 - sales');
+const drogalesteSales = require('./Routes/Drogaleste/sales');
 app.use('/api/drogaleste/sales', drogalesteSales);
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
-
 
 
 ///////////////////////////////////////////////////////////////////////////
@@ -66,12 +69,6 @@ app.get('/api/drogaleste/about', (req, res, next) => {
 	console.log(endpoints.path)
     res.status(200).send(endpoints);
   });  
-
-const Download = require('./Homolog/TesteDownload');
-app.use('/api/Download', Download);
-
-const testEmail = require('./Homolog/generateCredentials');
-app.use('/api/email/', testEmail);
 
 
 module.exports = app;
