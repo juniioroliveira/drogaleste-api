@@ -68,8 +68,6 @@ const testEmail = require('./Homolog/generateCredentials');
 app.use('/api/email/', testEmail);
 
 
-
-
 module.exports = app;
 
 
