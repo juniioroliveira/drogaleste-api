@@ -12,7 +12,7 @@ async function execSQLDrogalesteQuery(script, res){
     
     let messageSucess;
     let messageError;
-    let response;
+    let response; 
     
     sql.connect(strConn)
         .then(async conn => {
