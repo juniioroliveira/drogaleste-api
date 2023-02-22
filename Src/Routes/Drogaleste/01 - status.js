@@ -14,7 +14,6 @@ router.get('/', (req, res, next) => {
       status: 'Operando'
     });
   });
-
   
 module.exports = router;
 
