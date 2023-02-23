@@ -6,7 +6,7 @@ const package = require('../../../package.json');
 const config = require('../../../Bin/config.json');
 const verifyJWT = require('../../Services/Functions/VerifyJwt');
 const execSQLDrogaleste = require('../../Services/Functions/drogalesteConnect'); 
-const execSQLDrogalesteHomolog = require('../../Homolog/drogalesteConnectHomolog'); 
+const execSQLDrogalesteHomolog = require('../../Homolog/drogalesteConnectHomolog.js.old'); 
 const reportLog = require('../../Services/Functions/reportLog');
 
 /// <summary>

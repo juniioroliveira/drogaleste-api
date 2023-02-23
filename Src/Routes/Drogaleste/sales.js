@@ -6,7 +6,7 @@ const verifyJWT = require('../../Services/Functions/VerifyJwt');
 const reportLog = require('../../Services/Functions/reportLog');
 
 const execSQLDrogaleste = require('../../Services/Functions/drogalesteConnect');
-const execSQLDrogalesteHomolog = require('../../Homolog/drogalesteConnectHomolog'); 
+const execSQLDrogalesteHomolog = require('../../Homolog/drogalesteConnectHomolog.js.old'); 
 
 //RETORNA VENDAS BASEADAS NO PERIODO E LOJA INFORMDA
 router.get('/', verifyJWT, async (req, res, next) => {   

@@ -5,7 +5,7 @@ const package = require('../../../package.json');
 const reportLog = require('../../Services/Functions/reportLog');
 const verifyJWT = require('../../Services/Functions/VerifyJwt');
 const execSQLDrogaleste = require('../../Services/Functions/drogalesteConnect');
-const execSQLDrogalesteHomolog = require('../../Homolog/drogalesteConnectHomolog'); 
+const execSQLDrogalesteHomolog = require('../../Homolog/drogalesteConnectHomolog.js.old'); 
 
 //RETORNA DADOS DE UM CLIENTE
 router.get('/purchasehistoric/:cod', verifyJWT, async (req, res, next) => {
