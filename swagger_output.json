@@ -2,10 +2,10 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "Drogaleste api",
+    "title": "Drogaleste API",
     "description": ""
   },
-  "host": "http://apidrogaleste.ddns.net:7150/",
+  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
     "http"
@@ -13,7 +13,7 @@
   "paths": {
     "/api/drogaleste/about": {
       "get": {
-        "description": "",
+        "description": "teste de descricao",
         "parameters": [],
         "responses": {
           "200": {
