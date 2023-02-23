@@ -40,7 +40,7 @@ router.post('/', async (req, res, next) => {
    //               Execução do processo               //
   //////////////////////////////////////////////////////
     var response = await execSQLWhiteSpace(`SELECT API_USUARIO, CLIENT_ID, CLIENT_SECRET, EMAIL FROM DL_APIS_USUARIOS WHERE SITUACAO = 'Ativo' AND CLIENT_ID = '${clientId}' AND CLIENT_SECRET = '${clientSecret}'`);
-    console.log(response);
+    // console.log(response);
     // console.log(`SELECT API_USUARIO, CLIENT_ID, CLIENT_SECRET, EMAIL FROM DL_API_USUARIOS WHERE SITUACAO = 'Ativo' AND CLIENT_ID = '${clientId}' AND CLIENT_SECRET = '${clientSecret}'`);
     
 
