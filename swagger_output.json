@@ -5,7 +5,7 @@
     "title": "Drogaleste API",
     "description": ""
   },
-  "host": "localhost:3000",
+  "host": "apidrogaleste.ddns.net:7150",
   "basePath": "/",
   "schemes": [
     "http"
