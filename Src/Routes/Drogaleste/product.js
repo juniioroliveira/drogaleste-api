@@ -87,6 +87,7 @@ router.get('/stock/refresh/:cod', verifyJWT, async (req, res, next) => {
 /////RETORNA ESTOQUE DO PRODUTO BASEADO POR LOJA /////////////
 //////////////////////////////////////////////////////////////
 router.get('/stock', verifyJWT, async (req, res, next) => {     
+  const {produto, loja} = req.headers;
 
   /* DEFINIÇÕES DE DOCUMENTAÇÕES
     #swagger.tags = ['Produto']
@@ -115,7 +116,7 @@ router.get('/stock', verifyJWT, async (req, res, next) => {
 
    //               Verificação de parametros          //
   //////////////////////////////////////////////////////
-  if(!req.headers.produto || !req.headers.loja)
+  if(!produto || !loja)
   {
     let error = {
       code: 400,
@@ -132,13 +133,13 @@ router.get('/stock', verifyJWT, async (req, res, next) => {
 
    //       Declaração/Validação de parametros         //
   //////////////////////////////////////////////////////  
-  let produto = req.headers.produto;
-  let loja = req.headers.loja;
+  // let produto = req.headers.produto;
+  // let loja = req.headers.loja;
   reportLog(`Parametro:  *{loja: ${loja}, produto: ${produto}}`);
 
    //               Execução do processo               //
   //////////////////////////////////////////////////////
-  await execSQLDrogaleste(`EXEC API_PRODUCT_STOCK_GET '${produto}', ${loja}, 'N', NULL, NULL`, res);
+  await execSQLDrogaleste(`EXEC API_PRODUCT_STOCK_GET '${produto}', ${loja}, NULL, NULL, NULL`, res);
 
 }); 
 
@@ -285,7 +286,6 @@ router.get('/:cod', verifyJWT, async (req, res, next) => {
   //////////////////////////////////////////////////////
   if(!cod) // Verifica se o parametro foi informado
   {
-    console.log(cod);
     let error = {
       code: 400,
       message: 'Erro na identificação dos parametros',
