@@ -100,7 +100,7 @@ router.get('/current', verifyJWT, async (req, res, next) => {
 
    //               Execução do processo               //
   //////////////////////////////////////////////////////
-  await execSQLDrogaleste(`EXEC API_PROMOTIONS_CURRENT_GET NULL, ${loja}, NULL, ${promocao}, NULL, NULL, ${pagina}, ${linhas}`, res);
+  await execSQLDrogaleste(`EXEC API_PROMOTIONS_CURRENT_GET NULL, ${store}, NULL, ${promotion}, NULL, NULL, ${pagina}, ${linhas}`, res);
 
 });
 
