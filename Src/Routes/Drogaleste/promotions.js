@@ -11,6 +11,8 @@ const execSQLDrogalesteHomolog = require('../../Homolog/drogalesteConnectHomolog
 //RETORNA PRODUTOS DE ACORDO COM PROMOÇÃO
 router.get('/current', verifyJWT, async (req, res, next) => {
 
+  const {promotion, store, pagenumber, pagerows} = req.headers;
+
   /* DEFINIÇÕES DE DOCUMENTAÇÕES
     #swagger.tags = ['Promoção']
     #swagger.description = 'Obtem array de produtos da promoção recorrente informada '
@@ -38,7 +40,7 @@ router.get('/current', verifyJWT, async (req, res, next) => {
 
    //               Verificação de parametros          //
   //////////////////////////////////////////////////////
-  if(!req.headers.promocao || !req.headers.loja)
+  if(!promotion || !store)
   {
     let error = {
       code: 400,
@@ -53,15 +55,52 @@ router.get('/current', verifyJWT, async (req, res, next) => {
     return;
   }
 
+  if(pagenumber ) // Verifica se o parametro é numérico
+  {
+    if(!parseInt(pagenumber))
+    {
+      let error = {
+        code: 400,
+        message: 'Erro na paginação',
+        ex: 'O parametro *pageNumber informado não foi reconhecido como valor numérico',
+      }    
+  
+      res.status(400).send(error);
+      reportLog(`Ex:         O parametro *pageNumber informado não foi reconhecido como valor numérico`);
+      console.log('');
+  
+      return;
+    }
+  }
+ 
+  if(pagerows ) // Verifica se o parametro é numérico
+  {
+    if(!parseInt(pagerows))
+    {
+      let error = {
+        code: 400,
+        message: 'Erro na paginação',
+        ex: 'O parametro *pageRows informado não foi reconhecido como valor numérico',
+      }    
+  
+      res.status(400).send(error);
+      reportLog(`Ex:         O parametro *pageRows informado não foi reconhecido como valor numérico`);
+      console.log('');
+  
+      return;
+    }
+  }
+
    //       Declaração/Validação de parametros         //
   //////////////////////////////////////////////////////  
-  let promocao = req.headers.promocao;
-  let loja = req.headers.loja;
-  reportLog(`Parametro:  *{loja: ${loja}, promocao: ${promocao}}`);
+  let pagina = pagenumber ? pagenumber : 'NULL'; 
+  let linhas = pagerows ? pagerows : 'NULL'; 
+
+  reportLog(`Parametro:  *{loja: ${store}, promocao: ${promotion}, pageNumber: ${pagina}, pageRows: ${linhas}}`);
 
    //               Execução do processo               //
   //////////////////////////////////////////////////////
-  await execSQLDrogaleste(`EXEC API_PROMOTIONS_CURRENT_GET NULL, ${loja}, NULL, ${promocao}, NULL, NULL`, res);
+  await execSQLDrogaleste(`EXEC API_PROMOTIONS_CURRENT_GET NULL, ${loja}, NULL, ${promocao}, NULL, NULL, ${pagina}, ${linhas}`, res);
 
 });
 
