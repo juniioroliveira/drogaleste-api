@@ -20,7 +20,7 @@ async function execSQLDrogalesteQuery(script, res){
                                 .query(script)
                                 .then(async content => messageSucess = await content.recordset[0].res)
                                 .catch(async err =>  messageError = await err);
-                                console.log(messageSucess);
+                                console.log(messageError);
                                 if(response){
                                     
                                     if(messageError){
