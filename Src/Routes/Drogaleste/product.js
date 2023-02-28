@@ -138,7 +138,7 @@ router.get('/stock', verifyJWT, async (req, res, next) => {
 
    //               Execução do processo               //
   //////////////////////////////////////////////////////
-  await execSQLDrogaleste(`EXEC API_PRODUCT_STOCK_GET '${produto}', ${loja}, 'N'`, res);
+  await execSQLDrogaleste(`EXEC API_PRODUCT_STOCK_GET '${produto}', ${loja}, 'N', NULL, NULL`, res);
 
 }); 
 
@@ -293,7 +293,7 @@ router.get('/:cod', verifyJWT, async (req, res, next) => {
     }    
 
     res.status(400).send(error);
-    reportLog(`Ex:       Erro na definição dos parametros`);
+    reportLog(`Ex:         Erro na definição dos parametros`);
     console.log('');
 
     return;
