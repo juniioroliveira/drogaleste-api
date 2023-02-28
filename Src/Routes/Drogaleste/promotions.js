@@ -166,7 +166,7 @@ router.get('/suggested', verifyJWT, async (req, res, next) => {
 // RETORNA LISTA DE PROMOÇÕES
 router.get('/', verifyJWT, async (req, res, next) => { 
   
-  const {cod} = req.headers;
+  const {promotion} = req.headers;
   
   /* DEFINIÇÕES DE DOCUMENTAÇÕES
     #swagger.tags = ['Promoção']
@@ -196,9 +196,9 @@ router.get('/', verifyJWT, async (req, res, next) => {
   //               Verificação de parametros          //
 //////////////////////////////////////////////////////
 
-if(cod) // Verifica se o parametro é numérico
+if(promotion) // Verifica se o parametro é numérico
 {
-  if(!parseInt(cod))
+  if(!parseInt(promotion))
   {
     let error = {
       code: 400,
@@ -216,9 +216,9 @@ if(cod) // Verifica se o parametro é numérico
 
   //       Declaração/Validação de parametros         //
 //////////////////////////////////////////////////////   
-let promocao = cod ? cod : 'NULL'; 
+let cod = promotion ? promotion : 'NULL'; 
 
-reportLog(`Parametro:  *{promocao: ${promocao}}`);  
+reportLog(`Parametro:  *{promocao: ${cod}}`);  
 
    //               Execução do processo               //
   //////////////////////////////////////////////////////
