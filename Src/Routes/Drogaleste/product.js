@@ -87,7 +87,7 @@ router.get('/stock/refresh/:cod', verifyJWT, async (req, res, next) => {
 /////RETORNA ESTOQUE DO PRODUTO BASEADO POR LOJA /////////////
 //////////////////////////////////////////////////////////////
 router.get('/stock', verifyJWT, async (req, res, next) => {     
-  const {produto, loja} = req.headers;
+  const {produto, loja, pagenumber, pagerows} = req.headers;
 
   /* DEFINIÇÕES DE DOCUMENTAÇÕES
     #swagger.tags = ['Produto']
@@ -116,12 +116,27 @@ router.get('/stock', verifyJWT, async (req, res, next) => {
 
    //               Verificação de parametros          //
   //////////////////////////////////////////////////////
-  if(!produto || !loja)
+  if(!produto || !loja)// Verifica se o parametro foi informado
   {
     let error = {
       code: 400,
       message: 'Erro na identificação dos parametros',
       ex: 'Existem parametros que não foram informados!',
+    }    
+
+    res.status(400).send(error);
+    reportLog(`Ex:         Erro na definição dos parametros`);
+    console.log('');
+
+    return;
+  }
+
+  if(!parseInt(produto) || !parseInt(loja)) // Verifica se o parametro é numérico
+  {
+    let error = {
+      code: 400,
+      message: 'Erro na validação dos parametros',
+      ex: 'O parametro informado não foi reconhecido como valor numérico',
     }    
 
     res.status(400).send(error);
@@ -133,13 +148,14 @@ router.get('/stock', verifyJWT, async (req, res, next) => {
 
    //       Declaração/Validação de parametros         //
   //////////////////////////////////////////////////////  
-  // let produto = req.headers.produto;
-  // let loja = req.headers.loja;
+  let pagina = pagenumber ? pagenumber : 'NULL'; 
+  let linhas = pagerows ? pagerows : 'NULL'; 
+
   reportLog(`Parametro:  *{loja: ${loja}, produto: ${produto}}`);
 
    //               Execução do processo               //
   //////////////////////////////////////////////////////
-  await execSQLDrogaleste(`EXEC API_PRODUCT_STOCK_GET '${produto}', ${loja}, NULL, NULL, NULL`, res);
+  await execSQLDrogaleste(`EXEC API_PRODUCT_STOCK_GET '${produto}', ${loja}, NULL, ${pagina}, ${linhas}`, res);
 
 }); 
 
