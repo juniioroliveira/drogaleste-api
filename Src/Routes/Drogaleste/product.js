@@ -354,7 +354,9 @@ router.get('/refreshregistration', verifyJWT, async (req, res, next) => {
 
   //       Declaração/Validação de parametros         //
  //////////////////////////////////////////////////////   
-  loja = req.headers.loja ? req.headers.loja : 'NULL'; 
+  let pagina = pagenumber ? pagenumber : 'NULL'; 
+  let linhas = pagerows ? pagerows : 'NULL'; 
+  let loja = req.headers.loja ? req.headers.loja : 'NULL'; 
 
   if(loja !== 'NULL'){
     reportLog(`Parametro:  *{loja: ${loja}, pageNumber: ${pagina}, pageRows: ${linhas}}`);
@@ -362,8 +364,6 @@ router.get('/refreshregistration', verifyJWT, async (req, res, next) => {
     reportLog(`Parametro:  *{pageNumber: ${pagina}, pageRows: ${linhas}}`);
   }
 
-  let pagina = pagenumber ? pagenumber : 'NULL'; 
-  let linhas = pagerows ? pagerows : 'NULL'; 
 
    //               Execução do processo               //
   //////////////////////////////////////////////////////
