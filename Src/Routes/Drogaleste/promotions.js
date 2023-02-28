@@ -136,6 +136,8 @@ router.get('/campaigns', verifyJWT, async (req, res, next) => {
 
 //RETORNA SUGESTÃO DE PROMOÇÕES BASEADOS NO PRODUTO
 router.get('/suggested', verifyJWT, async (req, res, next) => {
+
+  const {procduct, store} = req.headers;
   
   /* DEFINIÇÕES DE DOCUMENTAÇÕES
     #swagger.tags = ['Promoção']
@@ -164,7 +166,7 @@ router.get('/suggested', verifyJWT, async (req, res, next) => {
 
    //               Verificação de parametros          //
   //////////////////////////////////////////////////////
-  if(!req.headers.produto || !req.headers.loja)
+  if(!product || !store)
   {
     let error = {
       code: 400,
@@ -179,15 +181,51 @@ router.get('/suggested', verifyJWT, async (req, res, next) => {
     return;
   }
 
+  if(product) // Verifica se o parametro é numérico
+  {
+    if(!parseInt(product))
+    {
+      let error = {
+        code: 400,
+        message: 'Erro na paginação',
+        ex: 'O parametro *product informado não foi reconhecido como valor numérico',
+      }    
+  
+      res.status(400).send(error);
+      reportLog(`Ex:         O parametro *product informado não foi reconhecido como valor numérico`);
+      console.log('');
+  
+      return;
+    }
+  }
+
+  if(store) // Verifica se o parametro é numérico
+  {
+    if(!parseInt(store))
+    {
+      let error = {
+        code: 400,
+        message: 'Erro na paginação',
+        ex: 'O parametro *store informado não foi reconhecido como valor numérico',
+      }    
+  
+      res.status(400).send(error);
+      reportLog(`Ex:         O parametro *store informado não foi reconhecido como valor numérico`);
+      console.log('');
+  
+      return;
+    }
+  }
+
    //       Declaração/Validação de parametros         //
   //////////////////////////////////////////////////////  
-  let produto = req.headers.produto;
-  let loja = req.headers.loja;
-  reportLog(`Parametro:  *{loja: ${loja}, produto: ${produto}}`);
+  // let produto = req.headers.produto;
+  // let loja = req.headers.loja;
+  // reportLog(`Parametro:  *{loja: ${loja}, produto: ${produto}}`);
 
    //               Execução do processo               //
   //////////////////////////////////////////////////////
-  await execSQLDrogaleste(`EXEC API_PROMOTIONS_CURRENT_GET NULL, ${loja}, NULL, NULL, NULL, ${produto}`, res);
+  await execSQLDrogaleste(`EXEC API_PROMOTIONS_CURRENT_GET NULL, ${store}, NULL, NULL, NULL, ${product}`, res);
 
 });  
 
