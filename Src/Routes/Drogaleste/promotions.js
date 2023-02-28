@@ -70,6 +70,8 @@ router.get('/current', verifyJWT, async (req, res, next) => {
 
 // RETORNA LISTA DE CAMPANHAS
 router.get('/campaigns', verifyJWT, async (req, res, next) => { 
+
+    const {campaign} = req.headers;
   
     /* DEFINIÇÕES DE DOCUMENTAÇÕES
       #swagger.tags = ['Promoção']
@@ -97,9 +99,36 @@ router.get('/campaigns', verifyJWT, async (req, res, next) => {
   reportLog(`Usário:     ${req.email}`);
   reportLog(`Rota:       ${req.method}${req.originalUrl}`);
 
+    //               Verificação de parametros          //
+  //////////////////////////////////////////////////////
+
+  if(campaign) // Verifica se o parametro é numérico
+  {
+    if(!parseInt(campaign))
+    {
+      let error = {
+        code: 400,
+        message: 'Erro na paginação',
+        ex: 'O parametro *campanha informado não foi reconhecido como valor numérico',
+      }    
+
+      res.status(400).send(error);
+      reportLog(`Ex:         O parametro *camoanha informado não foi reconhecido como valor numérico`);
+      console.log('');
+
+      return;
+    }
+  }
+
+    //       Declaração/Validação de parametros         //
+  //////////////////////////////////////////////////////   
+  let cod = campaign ? campaign : 'NULL'; 
+
+  reportLog(`Parametro:  *{campanha: ${cod}}`);  
+
    //               Execução do processo               //
   //////////////////////////////////////////////////////
-  await execSQLDrogaleste(`EXEC API_PROMOTIONS_CAMPAIGNS_GET NULL`, res);
+  await execSQLDrogaleste(`EXEC API_PROMOTIONS_CAMPAIGNS_GET ${cod}`, res);
  
 });
 
