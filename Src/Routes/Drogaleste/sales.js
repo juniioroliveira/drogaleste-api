@@ -11,6 +11,8 @@ const execSQLDrogalesteHomolog = require('../../Homolog/drogalesteConnectHomolog
 //RETORNA VENDAS BASEADAS NO PERIODO E LOJA INFORMDA
 router.get('/', verifyJWT, async (req, res, next) => {   
   
+  const {loja, movimento} = req.headers;
+
   /* DEFINIÇÕES DE DOCUMENTAÇÕES
     #swagger.tags = ['Venda']
     #swagger.description = 'Obtem array de vendas no periodo informado'
@@ -38,7 +40,7 @@ router.get('/', verifyJWT, async (req, res, next) => {
 
    //               Verificação de parametros          //
   //////////////////////////////////////////////////////
-  if(!req.headers.loja || !req.headers.movimento)
+  if(!loja || !movimento)
   {
     let error = {
       code: 400,
@@ -53,10 +55,44 @@ router.get('/', verifyJWT, async (req, res, next) => {
     return;
   }
 
+ if(pagenumber ) // Verifica se o parametro é numérico
+ {
+   if(!parseInt(pagenumber))
+   {
+     let error = {
+       code: 400,
+       message: 'Erro na paginação',
+       ex: 'O parametro *pageNumber informado não foi reconhecido como valor numérico',
+     }    
+ 
+     res.status(400).send(error);
+     reportLog(`Ex:         O parametro *pageNumber informado não foi reconhecido como valor numérico`);
+     console.log('');
+ 
+     return;
+   }
+ }
+
+ if(pagerows ) // Verifica se o parametro é numérico
+ {
+   if(!parseInt(pagerows))
+   {
+     let error = {
+       code: 400,
+       message: 'Erro na paginação',
+       ex: 'O parametro *pageRows informado não foi reconhecido como valor numérico',
+     }    
+ 
+     res.status(400).send(error);
+     reportLog(`Ex:         O parametro *pageRows informado não foi reconhecido como valor numérico`);
+     console.log('');
+ 
+     return;
+   }
+ }
+
    //       Declaração/Validação de parametros         //
   //////////////////////////////////////////////////////  
-  let loja = req.headers.loja;
-  let movimento = req.headers.movimento;
 
   let parametroDate = req.headers.movimento.split('/');
   let dd = parametroDate[0];
@@ -65,9 +101,14 @@ router.get('/', verifyJWT, async (req, res, next) => {
 
   movimento =  `${mm.padStart(2, '0')}-${dd.padStart(2, '0')}-${yy.padStart(4, '0')}`;
 
+  let pagina = pagenumber ? pagenumber : 'NULL'; 
+  let linhas = pagerows ? pagerows : 'NULL'; 
+
+  reportLog(`Parametro:  *{loja: ${loja}, movimento: ${movimento}, pageNumber: ${pagina}, pageRows: ${linhas}}`);  
+
    //               Execução do processo               //
   //////////////////////////////////////////////////////
-  await execSQLDrogaleste(`EXEC API_SALES_GET ${loja}, '${movimento}'`, res);
+  await execSQLDrogaleste(`EXEC API_SALES_GET ${loja}, '${movimento}', ${pagina}, ${linhas}`, res);
 
   });
   
