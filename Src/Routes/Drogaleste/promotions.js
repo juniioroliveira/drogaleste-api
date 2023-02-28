@@ -160,71 +160,13 @@ router.get('/suggested', verifyJWT, async (req, res, next) => {
   //////////////////////////////////////////////////////
   await execSQLDrogaleste(`EXEC API_PROMOTIONS_CURRENT_GET NULL, ${loja}, NULL, NULL, NULL, ${produto}`, res);
 
-});
-
-
-  
-// RETORNA PROMOÇÃO ESPECIFICA
-router.get('/:cod', verifyJWT, async (req, res, next) => {
-  
-  /* DEFINIÇÕES DE DOCUMENTAÇÕES
-    #swagger.tags = ['Promoção']
-    #swagger.description = 'Obtem detalhes de uma promoção especifica'
-     swagger.parameters['produto'] = { 
-                                    in: 'headers', 
-                                    type: 'integer', 
-                                    description: 'código do produto.', 
-                                    required: true
-                                  }
-     swagger.parameters['loja'] = { 
-                                    in: 'headers', 
-                                    type: 'integer', 
-                                    description: 'código da loja.', 
-                                    required: true
-                                  }
-    swagger.responses[200] = { 
-                                schema: { $ref: "#/definitions/Cliente/purchasehistoric" },
-                                description: 'Usuário encontrado.'
-                              }
-                               
-  */
-
-  reportLog(`Usário:     ${req.email}`);
-  reportLog(`Rota:       ${req.method}${req.originalUrl}`);
-
-   //               Verificação de parametros          //
-  //////////////////////////////////////////////////////
-  if(!req.params.cod)
-  {
-    let error = {
-      code: 400,
-      message: 'Erro na identificação dos parametros',
-      ex: 'Existem parametros que não foram informados!',
-    }    
-
-    res.status(400).send(error);
-    reportLog(`Ex:       Erro na definição dos parametros`);
-    console.log('');
-
-    return;
-  }
-
-   //       Declaração/Validação de parametros         //
-  //////////////////////////////////////////////////////  
-  let promocao = req.params.cod;
-  reportLog(`Parametro:  *{promocao: ${promocao}}`);
-
-   //               Execução do processo               //
-  //////////////////////////////////////////////////////
-  await execSQLDrogaleste(`EXEC API_PROMOTIONS_TYPE_GET ${promocao}`, res);
-  
-});
-
-  ///////////////////////////////////////////////////////////////////////////////////////
+});  
 
   
 // RETORNA LISTA DE PROMOÇÕES
-router.get('/', verifyJWT, async (req, res, next) => {  
+router.get('/', verifyJWT, async (req, res, next) => { 
+  
+  const {cod} = req.headers;
   
   /* DEFINIÇÕES DE DOCUMENTAÇÕES
     #swagger.tags = ['Promoção']
@@ -251,9 +193,36 @@ router.get('/', verifyJWT, async (req, res, next) => {
   reportLog(`Usário:     ${req.email}`);
   reportLog(`Rota:       ${req.method}${req.originalUrl}`);
 
+  //               Verificação de parametros          //
+//////////////////////////////////////////////////////
+
+if(cod) // Verifica se o parametro é numérico
+{
+  if(!parseInt(cod))
+  {
+    let error = {
+      code: 400,
+      message: 'Erro na paginação',
+      ex: 'O parametro *promocao informado não foi reconhecido como valor numérico',
+    }    
+
+    res.status(400).send(error);
+    reportLog(`Ex:         O parametro *promocao informado não foi reconhecido como valor numérico`);
+    console.log('');
+
+    return;
+  }
+}
+
+  //       Declaração/Validação de parametros         //
+//////////////////////////////////////////////////////   
+let promocao = cod ? cod : 'NULL'; 
+
+reportLog(`Parametro:  *{promocao: ${promocao}}`);  
+
    //               Execução do processo               //
   //////////////////////////////////////////////////////
-  await execSQLDrogaleste(`EXEC API_PROMOTIONS_TYPE_GET NULL`, res);
+  await execSQLDrogaleste(`EXEC API_PROMOTIONS_TYPE_GET ${promocao}`, res);
 });
   
 module.exports = router;
