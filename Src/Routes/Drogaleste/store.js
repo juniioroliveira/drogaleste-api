@@ -86,7 +86,7 @@ router.get('/:cod', verifyJWT, async (req, res, next) => {
 //RETORNA DADOS DE UMA LOJA
 router.get('/', verifyJWT, async (req, res, next) => {  
 
-  const {loja, matriz} = req.params;
+  const {loja, matriz} = req.headers;
   
   /* DEFINIÇÕES DE DOCUMENTAÇÕES
     #swagger.tags = ['Loja']
@@ -147,7 +147,6 @@ router.get('/', verifyJWT, async (req, res, next) => {
       return;
     }
   }
-  console.log(loja, matriz);
 
     //       Declaração/Validação de parametros         //
   //////////////////////////////////////////////////////   
