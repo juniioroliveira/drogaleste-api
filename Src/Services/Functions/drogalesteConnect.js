@@ -45,6 +45,7 @@ async function execSQLDrogalesteQuery(script, res){
                     
                     var error = {
                         code: 200,
+                        status: 1,
                         message: 'Dados retornados com sucesso'
                     }
 
