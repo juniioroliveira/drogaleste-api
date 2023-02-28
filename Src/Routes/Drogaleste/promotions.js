@@ -137,7 +137,7 @@ router.get('/campaigns', verifyJWT, async (req, res, next) => {
 //RETORNA SUGESTÃO DE PROMOÇÕES BASEADOS NO PRODUTO
 router.get('/suggested', verifyJWT, async (req, res, next) => {
 
-  const {procduct, store} = req.headers;
+  const {product, store} = req.headers;
   
   /* DEFINIÇÕES DE DOCUMENTAÇÕES
     #swagger.tags = ['Promoção']
