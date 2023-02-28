@@ -285,6 +285,7 @@ router.get('/:cod', verifyJWT, async (req, res, next) => {
   //////////////////////////////////////////////////////
   if(!cod) // Verifica se o parametro foi informado
   {
+    console.log(cod);
     let error = {
       code: 400,
       message: 'Erro na identificação dos parametros',
