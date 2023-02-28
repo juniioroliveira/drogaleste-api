@@ -119,7 +119,7 @@ router.get('/', verifyJWT, async (req, res, next) => {
       let error = {
         code: 400,
         message: 'Erro na paginação',
-        ex: 'O parametro *pageNumber informado não foi reconhecido como valor numérico',
+        ex: 'O parametro *loja informado não foi reconhecido como valor numérico',
       }    
   
       res.status(400).send(error);
@@ -137,7 +137,7 @@ router.get('/', verifyJWT, async (req, res, next) => {
       let error = {
         code: 400,
         message: 'Erro na paginação',
-        ex: 'O parametro *pageRows informado não foi reconhecido como valor numérico',
+        ex: 'O parametro *matriz informado não foi reconhecido como valor numérico',
       }    
   
       res.status(400).send(error);
@@ -147,6 +147,7 @@ router.get('/', verifyJWT, async (req, res, next) => {
       return;
     }
   }
+  console.log(loja, matriz);
 
     //       Declaração/Validação de parametros         //
   //////////////////////////////////////////////////////   
