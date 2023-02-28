@@ -99,16 +99,16 @@ router.get('/', verifyJWT, async (req, res, next) => {
   let mm = parametroDate[1];
   let yy = parametroDate[2];
 
-  movimento =  `${mm.padStart(2, '0')}-${dd.padStart(2, '0')}-${yy.padStart(4, '0')}`;
+  let mov =  `${mm.padStart(2, '0')}-${dd.padStart(2, '0')}-${yy.padStart(4, '0')}`;
 
   let pagina = pagenumber ? pagenumber : 'NULL'; 
   let linhas = pagerows ? pagerows : 'NULL'; 
 
-  reportLog(`Parametro:  *{loja: ${loja}, movimento: ${movimento}, pageNumber: ${pagina}, pageRows: ${linhas}}`);  
+  reportLog(`Parametro:  *{loja: ${loja}, movimento: ${mov}, pageNumber: ${pagina}, pageRows: ${linhas}}`);  
 
    //               Execução do processo               //
   //////////////////////////////////////////////////////
-  await execSQLDrogaleste(`EXEC API_SALES_GET ${loja}, '${movimento}', ${pagina}, ${linhas}`, res);
+  await execSQLDrogaleste(`EXEC API_SALES_GET ${loja}, '${mov}', ${pagina}, ${linhas}`, res);
 
   });
   
