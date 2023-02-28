@@ -91,6 +91,7 @@ router.get('/', verifyJWT, async (req, res, next) => {
    }
  }
 
+ 
    //       Declaração/Validação de parametros         //
   //////////////////////////////////////////////////////  
 
