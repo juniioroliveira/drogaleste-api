@@ -356,18 +356,13 @@ router.get('/refreshregistration', verifyJWT, async (req, res, next) => {
  //////////////////////////////////////////////////////   
   let pagina = pagenumber ? pagenumber : 'NULL'; 
   let linhas = pagerows ? pagerows : 'NULL'; 
-  let loja = req.headers.loja ? req.headers.loja : 'NULL'; 
 
-  if(loja !== 'NULL'){
-    reportLog(`Parametro:  *{loja: ${loja}, pageNumber: ${pagina}, pageRows: ${linhas}}`);
-  }else{
-    reportLog(`Parametro:  *{pageNumber: ${pagina}, pageRows: ${linhas}}`);
-  }
+  reportLog(`Parametro:  *{pageNumber: ${pagina}, pageRows: ${linhas}}`);  
 
 
    //               Execução do processo               //
   //////////////////////////////////////////////////////
-  await execSQLDrogaleste(`EXEC API_PRODUCT_GET NULL, ${loja}, 'S', 'JSON', ${pagina}, ${linhas}`, res);
+  await execSQLDrogaleste(`EXEC API_PRODUCT_GET NULL, NULL, 'S', 'JSON', ${pagina}, ${linhas}`, res);
 
 });
 
