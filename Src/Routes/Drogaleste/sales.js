@@ -94,7 +94,7 @@ router.get('/', verifyJWT, async (req, res, next) => {
    //       Declaração/Validação de parametros         //
   //////////////////////////////////////////////////////  
 
-  let parametroDate = req.headers.movimento.split('/');
+  let parametroDate = movimento.split('/');
   let dd = parametroDate[0];
   let mm = parametroDate[1];
   let yy = parametroDate[2];
