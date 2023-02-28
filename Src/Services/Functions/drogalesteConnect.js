@@ -40,7 +40,7 @@ async function execSQLDrogalesteQuery(script, res){
                                     if(messageSucess){
                                         
                                         console.log(messageSucess);
-
+                                        
                                         var error = {
                                             code: 200,
                                             message: 'Dados retornados com sucesso'
@@ -50,8 +50,9 @@ async function execSQLDrogalesteQuery(script, res){
                                         reportLog(`Message:    ${error.message}`) 
                                         console.log('');
     
-                                        // res.status(200).send(JSON.parse(messageSucess))
-                                        res.status(200).send(messageSucess)
+                                        console.log(messageSucess);
+                                        
+                                        res.status(200).send(JSON.parse(messageSucess))
                                     }
 
                                 }else{
