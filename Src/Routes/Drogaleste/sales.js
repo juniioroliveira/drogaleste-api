@@ -11,7 +11,7 @@ const execSQLDrogalesteHomolog = require('../../Homolog/drogalesteConnectHomolog
 //RETORNA VENDAS BASEADAS NO PERIODO E LOJA INFORMDA
 router.get('/', verifyJWT, async (req, res, next) => {   
   
-  const {loja, movimento} = req.headers;
+  const {loja, movimento, pagenumber, pagerows} = req.headers;
 
   /* DEFINIÇÕES DE DOCUMENTAÇÕES
     #swagger.tags = ['Venda']
