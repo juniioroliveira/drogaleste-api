@@ -28,8 +28,6 @@ const reportLog = require('../../Services/Functions/reportLog');
 /// 503: serviço não disponível
 /// 504: Tempo limite do gateway
 /// </summary> 
-  
-
 
 
 //////////////////////////////////////////////////////////////
