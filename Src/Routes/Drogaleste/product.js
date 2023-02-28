@@ -187,7 +187,7 @@ router.get('/stock', verifyJWT, async (req, res, next) => {
   let pagina = pagenumber ? pagenumber : 'NULL'; 
   let linhas = pagerows ? pagerows : 'NULL'; 
 
-  reportLog(`Parametro:  *{loja: ${loja}, produto: ${produto}}`);
+  reportLog(`Parametro:  *{loja: ${loja}, produto: ${produto}, pageNumber: ${pagenumber}, pageRows: ${pagerows}`);
 
    //               Execução do processo               //
   //////////////////////////////////////////////////////
@@ -228,20 +228,20 @@ router.get('/charge', verifyJWT, async (req, res, next) => {
 
    //               Verificação de parametros          //
   //////////////////////////////////////////////////////
-  if(!pagenumber || !pagerows)
-  {
-    let error = {
-      code: 400,
-      message: 'Erro na identificação dos parametros',
-      ex: 'Existem parametros que não foram informados!',
-    }    
+  // if(!pagenumber || !pagerows)
+  // {
+  //   let error = {
+  //     code: 400,
+  //     message: 'Erro na identificação dos parametros',
+  //     ex: 'Existem parametros que não foram informados!',
+  //   }    
 
-    res.status(400).send(error);
-    reportLog(`Ex:       Erro na definição dos parametros`);
-    console.log('');
+  //   res.status(400).send(error);
+  //   reportLog(`Ex:       Erro na definição dos parametros`);
+  //   console.log('');
 
-    return;
-  }
+  //   return;
+  // }
 
   if(pagenumber ) // Verifica se o parametro é numérico
   {
@@ -282,13 +282,14 @@ router.get('/charge', verifyJWT, async (req, res, next) => {
    //       Declaração/Validação de parametros         //
   //////////////////////////////////////////////////////   
 
-  // let pagenumber = req.headers.pagenumber;
-  // let pagerows = req.headers.pagerows;
-  reportLog(`Parametro:  *{pageNumber: ${pagenumber}, pageRows: ${pagerows}}`);
+  let pagina = pagenumber ? pagenumber : 'NULL'; 
+  let linhas = pagerows ? pagerows : 'NULL'; 
+
+  reportLog(`Parametro:  *{pageNumber: ${pagina}, pageRows: ${linhas}}`);
 
    //               Execução do processo               //
   //////////////////////////////////////////////////////
-  await execSQLDrogaleste(`EXEC API_PRODUCT_GET NULL, NULL, 'N', 'JSON', ${pagenumber}, ${pagerows}`, res);
+  await execSQLDrogaleste(`EXEC API_PRODUCT_GET NULL, NULL, 'N', 'JSON', ${pagina}, ${linhas}`, res);
 
 });
   
