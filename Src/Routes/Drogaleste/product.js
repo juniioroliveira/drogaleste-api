@@ -146,6 +146,42 @@ router.get('/stock', verifyJWT, async (req, res, next) => {
     return;
   }
 
+  if(pagenumber ) // Verifica se o parametro é numérico
+  {
+    if(!parseInt(pagenumber))
+    {
+      let error = {
+        code: 400,
+        message: 'Erro na paginação',
+        ex: 'O parametro *pageNumber informado não foi reconhecido como valor numérico',
+      }    
+  
+      res.status(400).send(error);
+      reportLog(`Ex:       Erro na definição dos parametros`);
+      console.log('');
+  
+      return;
+    }
+  }
+
+  if(pagerows ) // Verifica se o parametro é numérico
+  {
+    if(!parseInt(pagerows))
+    {
+      let error = {
+        code: 400,
+        message: 'Erro na paginação',
+        ex: 'O parametro *pageRows informado não foi reconhecido como valor numérico',
+      }    
+  
+      res.status(400).send(error);
+      reportLog(`Ex:       Erro na definição dos parametros`);
+      console.log('');
+  
+      return;
+    }
+  }
+
    //       Declaração/Validação de parametros         //
   //////////////////////////////////////////////////////  
   let pagina = pagenumber ? pagenumber : 'NULL'; 
