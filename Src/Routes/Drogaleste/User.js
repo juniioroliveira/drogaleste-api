@@ -61,8 +61,9 @@ router.post('/new', async (req, res, next) => {
 
           var response = await execSQLDrogaleste(`EXEC API_NEW_USER_POST '${nome}', ${inscricaoFederal}, '${email}'`)
     
+          const {status} = response.status;
           if(response){
-            if(JSON.parse(response).status == 1){
+            if(status == 1){
 
               const htmlUsuario = 
               `<div class="SlLx9 byzS1" style="margin-right: 20px; margin-left: 8px; padding: 0px 12px 12px; width: calc(100% - 53.5px);" tabindex="-1" aria-label="Mensagem de email">` +
