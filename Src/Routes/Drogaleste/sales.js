@@ -10,6 +10,28 @@ const execSQLDrogalesteHomolog = require('../../Homolog/drogalesteConnectHomolog
 
 //RETORNA VENDAS BASEADAS NO PERIODO E LOJA INFORMDA
 router.get('/', verifyJWT, async (req, res, next) => {   
+  
+  /* DEFINIÇÕES DE DOCUMENTAÇÕES
+    #swagger.tags = ['Venda']
+    #swagger.description = 'Obtem array de vendas no periodo informado'
+     swagger.parameters['produto'] = { 
+                                    in: 'headers', 
+                                    type: 'integer', 
+                                    description: 'código do produto.', 
+                                    required: true
+                                  }
+     swagger.parameters['loja'] = { 
+                                    in: 'headers', 
+                                    type: 'integer', 
+                                    description: 'código da loja.', 
+                                    required: true
+                                  }
+    swagger.responses[200] = { 
+                                schema: { $ref: "#/definitions/Cliente/purchasehistoric" },
+                                description: 'Usuário encontrado.'
+                              }
+                               
+  */
 
   reportLog(`Usário:     ${req.email}`);
   reportLog(`Rota:       ${req.method}${req.originalUrl}`);

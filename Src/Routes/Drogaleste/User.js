@@ -10,6 +10,28 @@ const { Console } = require('console');
 
 
 router.post('/new', async (req, res, next) => {  
+  
+  /* DEFINIÇÕES DE DOCUMENTAÇÕES
+    #swagger.tags = ['Autenticação']
+    #swagger.description = 'Solicita o cadastro de usuário'
+     swagger.parameters['produto'] = { 
+                                    in: 'headers', 
+                                    type: 'integer', 
+                                    description: 'código do produto.', 
+                                    required: true
+                                  }
+     swagger.parameters['loja'] = { 
+                                    in: 'headers', 
+                                    type: 'integer', 
+                                    description: 'código da loja.', 
+                                    required: true
+                                  }
+    swagger.responses[200] = { 
+                                schema: { $ref: "#/definitions/Cliente/purchasehistoric" },
+                                description: 'Usuário encontrado.'
+                              }
+                               
+  */
 
     try{
         let user = req.headers;    
@@ -185,6 +207,28 @@ router.post('/new', async (req, res, next) => {
   
 //Autoriza usuário
 router.post('/authorize/:clientId', async (req, res, next) => {    
+  
+  /* DEFINIÇÕES DE DOCUMENTAÇÕES
+    #swagger.tags = ['Autenticação']
+    #swagger.description = 'Autoriza e habilita o usuário'
+     swagger.parameters['produto'] = { 
+                                    in: 'headers', 
+                                    type: 'integer', 
+                                    description: 'código do produto.', 
+                                    required: true
+                                  }
+     swagger.parameters['loja'] = { 
+                                    in: 'headers', 
+                                    type: 'integer', 
+                                    description: 'código da loja.', 
+                                    required: true
+                                  }
+    swagger.responses[200] = { 
+                                schema: { $ref: "#/definitions/Cliente/purchasehistoric" },
+                                description: 'Usuário encontrado.'
+                              }
+                               
+  */
 
   try{    
   

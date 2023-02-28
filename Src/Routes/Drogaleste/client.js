@@ -10,6 +10,22 @@ const execSQLDrogalesteHomolog = require('../../Homolog/drogalesteConnectHomolog
 //RETORNA DADOS DE UM CLIENTE
 router.get('/purchasehistoric/:cod', verifyJWT, async (req, res, next) => {
 
+  /* DEFINIÇÕES DE DOCUMENTAÇÕES
+    #swagger.tags = ['Cliente']
+    #swagger.description = 'Obtem todas as alterações de cadastro de clientes na data atual.'
+     swagger.parameters['cod'] = { 
+                                    in: 'headers', 
+                                    type: 'integer', 
+                                    description: 'código do cliente.', 
+                                    required: true
+                                  }
+    swagger.responses[200] = { 
+                                schema: { $ref: "#/definitions/Cliente/purchasehistoric" },
+                                description: 'Usuário encontrado.'
+                              }
+                               
+  */
+
   reportLog(`Usário: ${req.email}`);
 
   let cod = req.params.cod;
@@ -21,6 +37,22 @@ router.get('/purchasehistoric/:cod', verifyJWT, async (req, res, next) => {
   
 //RETORNA HISTÓRICO DE COMPRAS
 router.get('/:cod', verifyJWT, async (req, res, next) => {   
+
+  /* DEFINIÇÕES DE DOCUMENTAÇÕES
+    #swagger.tags = ['Cliente']
+    #swagger.description = 'Obtem informações de um cliente de acordo com os parametros informados.'
+     swagger.parameters['cod'] = { 
+                                    in: 'headers', 
+                                    type: 'integer', 
+                                    description: 'código do cliente.', 
+                                    required: true
+                                  }
+    swagger.responses[200] = { 
+                                schema: { $ref: "#/definitions/Cliente/purchasehistoric" },
+                                description: 'Usuário encontrado.'
+                              }
+                               
+  */
 
   reportLog(`Usário:     ${req.email}`);
   reportLog(`Rota:       ${req.method}${req.originalUrl}`);

@@ -11,6 +11,28 @@ const execSQLDrogalesteHomolog = require('../../Homolog/drogalesteConnectHomolog
 //RETORNA PRODUTOS DE ACORDO COM PROMOÇÃO
 router.get('/current', verifyJWT, async (req, res, next) => {
 
+  /* DEFINIÇÕES DE DOCUMENTAÇÕES
+    #swagger.tags = ['Promoção']
+    #swagger.description = 'Obtem array de produtos da promoção recorrente informada '
+     swagger.parameters['produto'] = { 
+                                    in: 'headers', 
+                                    type: 'integer', 
+                                    description: 'código do produto.', 
+                                    required: true
+                                  }
+     swagger.parameters['loja'] = { 
+                                    in: 'headers', 
+                                    type: 'integer', 
+                                    description: 'código da loja.', 
+                                    required: true
+                                  }
+    swagger.responses[200] = { 
+                                schema: { $ref: "#/definitions/Cliente/purchasehistoric" },
+                                description: 'Usuário encontrado.'
+                              }
+                               
+  */
+
   reportLog(`Usário:     ${req.email}`);
   reportLog(`Rota:       ${req.method}${req.originalUrl}`);
 
@@ -48,6 +70,29 @@ router.get('/current', verifyJWT, async (req, res, next) => {
 
 // RETORNA LISTA DE CAMPANHAS
 router.get('/campaigns', verifyJWT, async (req, res, next) => { 
+  
+    /* DEFINIÇÕES DE DOCUMENTAÇÕES
+      #swagger.tags = ['Promoção']
+      #swagger.description = 'Obtem array dos tipos de promoções'
+       swagger.parameters['produto'] = { 
+                                      in: 'headers', 
+                                      type: 'integer', 
+                                      description: 'código do produto.', 
+                                      required: true
+                                    }
+       swagger.parameters['loja'] = { 
+                                      in: 'headers', 
+                                      type: 'integer', 
+                                      description: 'código da loja.', 
+                                      required: true
+                                    }
+      swagger.responses[200] = { 
+                                  schema: { $ref: "#/definitions/Cliente/purchasehistoric" },
+                                  description: 'Usuário encontrado.'
+                                }
+                                 
+    */
+  
 
   reportLog(`Usário:     ${req.email}`);
   reportLog(`Rota:       ${req.method}${req.originalUrl}`);
@@ -62,6 +107,28 @@ router.get('/campaigns', verifyJWT, async (req, res, next) => {
 
 //RETORNA SUGESTÃO DE PROMOÇÕES BASEADOS NO PRODUTO
 router.get('/suggested', verifyJWT, async (req, res, next) => {
+  
+  /* DEFINIÇÕES DE DOCUMENTAÇÕES
+    #swagger.tags = ['Promoção']
+    #swagger.description = 'Obtem array de promoções vigentes de um produto'
+     swagger.parameters['produto'] = { 
+                                    in: 'headers', 
+                                    type: 'integer', 
+                                    description: 'código do produto.', 
+                                    required: true
+                                  }
+     swagger.parameters['loja'] = { 
+                                    in: 'headers', 
+                                    type: 'integer', 
+                                    description: 'código da loja.', 
+                                    required: true
+                                  }
+    swagger.responses[200] = { 
+                                schema: { $ref: "#/definitions/Cliente/purchasehistoric" },
+                                description: 'Usuário encontrado.'
+                              }
+                               
+  */
 
   reportLog(`Usário:     ${req.email}`);
   reportLog(`Rota:       ${req.method}${req.originalUrl}`);
@@ -99,6 +166,28 @@ router.get('/suggested', verifyJWT, async (req, res, next) => {
   
 // RETORNA PROMOÇÃO ESPECIFICA
 router.get('/:cod', verifyJWT, async (req, res, next) => {
+  
+  /* DEFINIÇÕES DE DOCUMENTAÇÕES
+    #swagger.tags = ['Promoção']
+    #swagger.description = 'Obtem detalhes de uma promoção especifica'
+     swagger.parameters['produto'] = { 
+                                    in: 'headers', 
+                                    type: 'integer', 
+                                    description: 'código do produto.', 
+                                    required: true
+                                  }
+     swagger.parameters['loja'] = { 
+                                    in: 'headers', 
+                                    type: 'integer', 
+                                    description: 'código da loja.', 
+                                    required: true
+                                  }
+    swagger.responses[200] = { 
+                                schema: { $ref: "#/definitions/Cliente/purchasehistoric" },
+                                description: 'Usuário encontrado.'
+                              }
+                               
+  */
 
   reportLog(`Usário:     ${req.email}`);
   reportLog(`Rota:       ${req.method}${req.originalUrl}`);
@@ -136,6 +225,28 @@ router.get('/:cod', verifyJWT, async (req, res, next) => {
   
 // RETORNA LISTA DE PROMOÇÕES
 router.get('/', verifyJWT, async (req, res, next) => {  
+  
+  /* DEFINIÇÕES DE DOCUMENTAÇÕES
+    #swagger.tags = ['Promoção']
+    #swagger.description = 'Obtem array dos tipos de promoções'
+     swagger.parameters['produto'] = { 
+                                    in: 'headers', 
+                                    type: 'integer', 
+                                    description: 'código do produto.', 
+                                    required: true
+                                  }
+     swagger.parameters['loja'] = { 
+                                    in: 'headers', 
+                                    type: 'integer', 
+                                    description: 'código da loja.', 
+                                    required: true
+                                  }
+    swagger.responses[200] = { 
+                                schema: { $ref: "#/definitions/Cliente/purchasehistoric" },
+                                description: 'Usuário encontrado.'
+                              }
+                               
+  */
 
   reportLog(`Usário:     ${req.email}`);
   reportLog(`Rota:       ${req.method}${req.originalUrl}`);

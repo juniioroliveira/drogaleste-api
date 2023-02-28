@@ -1,51 +1,15 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "3.0.0",
+    "version": "1.0.0",
     "title": "Drogaleste API",
-    "description": "Documentação para integrações com empresas reservadas <b>swagger-autogen</b> module."
+    "description": "Documentação da API da Drogaleste"
   },
   "host": "apidrogaleste.ddns.net:7150",
-  "basePath": "/",
+  "basePath": "api/",
   "tags": [
     {
-      "name": "Autenticação",
-      "description": "Endpoints"
-    },
-    {
-      "name": "Produto",
-      "description": "Endpoints"
-    },
-    {
-      "name": "Loja",
-      "description": "Endpoints"
-    },
-    {
-      "name": "Cliente",
-      "description": "Endpoints"
-    },
-    {
-      "name": "Promoção",
-      "description": "Endpoints"
-    },
-    {
-      "name": "Venda",
-      "description": "Endpoints"
-    },
-    {
-      "name": "Delivery",
-      "description": "Endpoints"
-    },
-    {
-      "name": "Estoque",
-      "description": "Endpoints"
-    },
-    {
-      "name": "Carga",
-      "description": "Endpoints"
-    },
-    {
-      "name": "Ferramenta",
+      "name": "User",
       "description": "Endpoints"
     }
   ],
@@ -54,19 +18,11 @@
     "https"
   ],
   "securityDefinitions": {
-    "api_key": {
-      "type": "apiKey",
-      "name": "api_key",
-      "in": "header"
-    },
-    "petstore_auth": {
-      "type": "oauth2",
-      "authorizationUrl": "https://petstore.swagger.io/oauth/authorize",
-      "flow": "implicit",
-      "scopes": {
-        "read_pets": "read your pets",
-        "write_pets": "modify pets in your account"
-      }
+    "JWT": {
+      "description": "JWT token",
+      "type": "Bearer",
+      "in": "body",
+      "name": "Authorization"
     }
   },
   "consumes": [
@@ -78,10 +34,7 @@
   "paths": {
     "/api/drogaleste/about": {
       "get": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint para obter um usuário.",
+        "description": "",
         "parameters": [],
         "responses": {
           "200": {
@@ -90,33 +43,21 @@
         }
       }
     },
-    "/api/oauth2/": {
+    "/api/oauth/": {
       "post": {
-        "tags": [
-          "Autenticação"
-        ],
-        "description": "Obtem token de acesso que deve ser usado nas demais chamadas.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "description": "",
         "parameters": [
           {
-            "name": "User",
+            "name": "body",
             "in": "body",
-            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "clientId": {
-                  "type": "string",
-                  "example": "string"
+                  "example": "any"
                 },
                 "clientSecret": {
-                  "type": "string",
-                  "example": "string"
+                  "example": "any"
                 }
               }
             }
@@ -124,72 +65,23 @@
         ],
         "responses": {
           "200": {
-            "description": "Sucesso",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "auth": {
-                  "type": "string",
-                  "example": "boolean"
-                },
-                "tokenType": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "accessToken": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "expiresIn": {
-                  "type": "string",
-                  "example": "integer"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
+            "description": "OK"
           },
           "400": {
-            "description": "Solicitação inválida",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "code": {
-                  "type": "string",
-                  "example": "integer"
-                },
-                "process": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "router": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "message": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "ex": {
-                  "type": "string",
-                  "example": "string"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
     },
     "/api/status/": {
       "get": {
-        "tags": [
-          "Ferramenta"
-        ],
-        "description": "Obtem status de operação do serviço",
+        "description": "",
         "parameters": [],
         "responses": {
           "200": {
@@ -200,10 +92,7 @@
     },
     "/api/user/new": {
       "post": {
-        "tags": [
-          "Autenticação"
-        ],
-        "description": "Solicita o cadastro de usuário",
+        "description": "",
         "parameters": [
           {
             "name": "inscricaofederal",
@@ -226,20 +115,17 @@
             "description": "OK"
           },
           "404": {
-            "description": "Não Encontrado"
+            "description": "Not Found"
           },
           "406": {
-            "description": "Não Aceito"
+            "description": "Not Acceptable"
           }
         }
       }
     },
     "/api/user/authorize/{clientId}": {
       "post": {
-        "tags": [
-          "Autenticação"
-        ],
-        "description": "Autoriza e habilita o usuário",
+        "description": "",
         "parameters": [
           {
             "name": "clientId",
@@ -253,17 +139,14 @@
             "description": "OK"
           },
           "404": {
-            "description": "Não Encontrado"
+            "description": "Not Found"
           }
         }
       }
     },
     "/api/drogaleste/client/purchasehistoric/{cod}": {
       "get": {
-        "tags": [
-          "Cliente"
-        ],
-        "description": "Obtem todas as alterações de cadastro de clientes na data atual.",
+        "description": "",
         "parameters": [
           {
             "name": "cod",
@@ -282,20 +165,17 @@
             "description": "OK"
           },
           "401": {
-            "description": "Não autorizado"
+            "description": "Unauthorized"
           },
           "403": {
-            "description": "Acesso Negado"
+            "description": "Forbidden"
           }
         }
       }
     },
     "/api/drogaleste/client/{cod}": {
       "get": {
-        "tags": [
-          "Cliente"
-        ],
-        "description": "Obtem informações de um cliente de acordo com os parametros informados.",
+        "description": "",
         "parameters": [
           {
             "name": "cod",
@@ -311,23 +191,20 @@
         ],
         "responses": {
           "400": {
-            "description": "Solicitação Inválida"
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Não autorizado"
+            "description": "Unauthorized"
           },
           "403": {
-            "description": "Acesso Negado"
+            "description": "Forbidden"
           }
         }
       }
     },
     "/api/drogaleste/product/stock/refresh/{cod}": {
       "get": {
-        "tags": [
-          "Produto"
-        ],
-        "description": "Obtem array de produtos que sofreram alteração de estoque na data atual",
+        "description": "",
         "parameters": [
           {
             "name": "cod",
@@ -343,23 +220,20 @@
         ],
         "responses": {
           "400": {
-            "description": "Solicitação Inválida"
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Não autorizado"
+            "description": "Unauthorized"
           },
           "403": {
-            "description": "Acesso Negado"
+            "description": "Forbidden"
           }
         }
       }
     },
     "/api/drogaleste/product/stock": {
       "get": {
-        "tags": [
-          "Produto"
-        ],
-        "description": "Obtem estoque do produto",
+        "description": "",
         "parameters": [
           {
             "name": "produto",
@@ -379,23 +253,20 @@
         ],
         "responses": {
           "400": {
-            "description": "Solicitação Inválida"
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Não autorizado"
+            "description": "Unauthorized"
           },
           "403": {
-            "description": "Acesso Negado"
+            "description": "Forbidden"
           }
         }
       }
     },
     "/api/drogaleste/product/charge": {
       "get": {
-        "tags": [
-          "Produto"
-        ],
-        "description": "Obtem array de cadastros de todos os produtos",
+        "description": "",
         "parameters": [
           {
             "name": "pagenumber",
@@ -415,23 +286,20 @@
         ],
         "responses": {
           "400": {
-            "description": "Solicitação Inválida"
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Não autorizado"
+            "description": "Unauthorized"
           },
           "403": {
-            "description": "Acesso Negado"
+            "description": "Forbidden"
           }
         }
       }
     },
     "/api/drogaleste/product/refreshregistration": {
       "get": {
-        "tags": [
-          "Produto"
-        ],
-        "description": "Obtem array de produtos que sofreram alteração de cadastro na data atual",
+        "description": "",
         "parameters": [
           {
             "name": "loja",
@@ -446,20 +314,17 @@
         ],
         "responses": {
           "401": {
-            "description": "Não autorizado"
+            "description": "Unauthorized"
           },
           "403": {
-            "description": "Acesso Negado"
+            "description": "Forbidden"
           }
         }
       }
     },
     "/api/drogaleste/product/{cod}": {
       "get": {
-        "tags": [
-          "Produto"
-        ],
-        "description": "Obtem detalhes do cadastro de um produto",
+        "description": "",
         "parameters": [
           {
             "name": "cod",
@@ -480,51 +345,49 @@
         ],
         "responses": {
           "400": {
-            "description": "Solicitação Inválida"
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Não autorizado"
+            "description": "Unauthorized"
           },
           "403": {
-            "description": "Acesso Negado"
+            "description": "Forbidden"
           }
         }
       }
     },
     "/api/drogaleste/store/{cod}": {
       "get": {
-        "tags": [
-          "Loja"
-        ],
-        "description": "Obtem detalhes de uma loja ",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "description": "",
         "parameters": [
           {
             "name": "cod",
             "in": "path",
-            "description": "Código da loja",
             "required": true,
-            "type": "integer"
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
         }
       }
     },
     "/api/drogaleste/store/": {
       "get": {
-        "tags": [
-          "Loja"
-        ],
-        "description": "Obtem array de lojas ",
+        "description": "",
         "parameters": [
           {
             "name": "authorization",
@@ -534,20 +397,17 @@
         ],
         "responses": {
           "401": {
-            "description": "Não autorizado"
+            "description": "Unauthorized"
           },
           "403": {
-            "description": "Acesso Negado"
+            "description": "Forbidden"
           }
         }
       }
     },
     "/api/drogaleste/promotions/current": {
       "get": {
-        "tags": [
-          "Promoção"
-        ],
-        "description": "Obtem array de produtos da promoção recorrente informada ",
+        "description": "",
         "parameters": [
           {
             "name": "promocao",
@@ -567,23 +427,20 @@
         ],
         "responses": {
           "400": {
-            "description": "Solicitação Inválida"
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Não autorizado"
+            "description": "Unauthorized"
           },
           "403": {
-            "description": "Acesso Negado"
+            "description": "Forbidden"
           }
         }
       }
     },
     "/api/drogaleste/promotions/campaigns": {
       "get": {
-        "tags": [
-          "Promoção"
-        ],
-        "description": "Obtem array dos tipos de promoções",
+        "description": "",
         "parameters": [
           {
             "name": "authorization",
@@ -593,20 +450,17 @@
         ],
         "responses": {
           "401": {
-            "description": "Não autorizado"
+            "description": "Unauthorized"
           },
           "403": {
-            "description": "Acesso Negado"
+            "description": "Forbidden"
           }
         }
       }
     },
     "/api/drogaleste/promotions/suggested": {
       "get": {
-        "tags": [
-          "Promoção"
-        ],
-        "description": "Obtem array de promoções vigentes de um produto",
+        "description": "",
         "parameters": [
           {
             "name": "produto",
@@ -626,23 +480,20 @@
         ],
         "responses": {
           "400": {
-            "description": "Solicitação Inválida"
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Não autorizado"
+            "description": "Unauthorized"
           },
           "403": {
-            "description": "Acesso Negado"
+            "description": "Forbidden"
           }
         }
       }
     },
     "/api/drogaleste/promotions/{cod}": {
       "get": {
-        "tags": [
-          "Promoção"
-        ],
-        "description": "Obtem detalhes de uma promoção especifica",
+        "description": "",
         "parameters": [
           {
             "name": "cod",
@@ -658,23 +509,20 @@
         ],
         "responses": {
           "400": {
-            "description": "Solicitação Inválida"
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Não autorizado"
+            "description": "Unauthorized"
           },
           "403": {
-            "description": "Acesso Negado"
+            "description": "Forbidden"
           }
         }
       }
     },
     "/api/drogaleste/promotions/": {
       "get": {
-        "tags": [
-          "Promoção"
-        ],
-        "description": "Obtem array dos tipos de promoções",
+        "description": "",
         "parameters": [
           {
             "name": "authorization",
@@ -684,20 +532,17 @@
         ],
         "responses": {
           "401": {
-            "description": "Não autorizado"
+            "description": "Unauthorized"
           },
           "403": {
-            "description": "Acesso Negado"
+            "description": "Forbidden"
           }
         }
       }
     },
     "/api/drogaleste/sales/": {
       "get": {
-        "tags": [
-          "Venda"
-        ],
-        "description": "Obtem array de vendas no periodo informado",
+        "description": "",
         "parameters": [
           {
             "name": "loja",
@@ -717,23 +562,20 @@
         ],
         "responses": {
           "400": {
-            "description": "Solicitação Inválida"
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Não autorizado"
+            "description": "Unauthorized"
           },
           "403": {
-            "description": "Acesso Negado"
+            "description": "Forbidden"
           }
         }
       }
     },
     "/api/drogaleste/delivery/events/": {
       "get": {
-        "tags": [
-          "Delivery"
-        ],
-        "description": "Solicita o cadastro de usuário",
+        "description": "",
         "parameters": [],
         "responses": {
           "200": {

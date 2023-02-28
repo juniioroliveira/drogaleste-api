@@ -6,17 +6,79 @@ const execSQLWhiteSpace = require('../../Services/Functions/whitespaceConnect');
 const reportLog = require('../../Services/Functions/reportLog');
 const errorCode = require('../../Homolog/statesError.json');
 
+  /* DEFINIÇÕES DE DOCUMENTAÇÕES
+    #swagger.tags = ['Autenticação']
+    #swagger.description = 'Obtem token de acesso que deve ser usado nas demais chamadas.'
+    swagger.parameters['cod'] = { 
+                                    in: 'headers', 
+                                    type: 'integer', 
+                                    description: 'código do cliente.', 
+                                    required: true
+                                  }
+    swagger.responses[400] = { 
+                                schema: { $ref: "#/definitions/Cliente/purchasehistoric" },
+                                description: 'Usuário encontrado.'
+                              }
+  
+                               
+  */
+
 
 router.post('/', async (req, res, next) => {
+
+  /*  #swagger.auto = false
+      #swagger.sumary = 'teste sumary'
+      #swagger.tags = ['Autenticação']
+       swagger.path = '/api/drogaleste/store/{id}'
+       swagger.method = 'get'
+      #swagger.description = 'Obtem token de acesso que deve ser usado nas demais chamadas.'
+      #swagger.produces = ["application/json"]
+      #swagger.consumes = ["application/json"]
+  */
+
+  /*  #swagger.parameters['User'] = {
+          in: 'body',
+          required: true,
+          type: 'object',
+          schema: {
+                    clientId: 'string',
+                    clientSecret: 'string'
+                  }
+      }
+
+      
+      #swagger.responses[200] = {
+                                  description: 'Sucesso',
+                                  schema: {
+                                    auth: 'boolean',
+                                    tokenType: 'string',
+                                    accessToken: 'string',
+                                    expiresIn: 'integer'
+                                  }
+                              }
+      #swagger.responses[400] = {
+                                  description: 'Solicitação inválida',
+                                  schema: {
+                                    code: 'integer',
+                                    process: 'string',
+                                    router: 'string',
+                                    message: 'string',
+                                    ex: 'string'
+                                  }
+                              }
+  */
+ 
   
   try{     
 
     reportLog(`Processo:   Gerando token de acesso`);
-    // console.log(req.body);
+
 
    //               Verificação de parametros          //
   //////////////////////////////////////////////////////
-    if(!req.body.clientId || !req.body.clientSecret)
+   const {clientId, clientSecret} = req.body  
+
+    if(!clientId || !clientSecret)
     {
       let error = {
         code: errorCode.SolicitacaoIncorreta,
@@ -30,18 +92,9 @@ router.post('/', async (req, res, next) => {
       return;
     }
 
-
-   //       Declaração/Validação de parametros         //
-  //////////////////////////////////////////////////////      
-    var clientId = req.body.clientId;
-    var clientSecret = req.body.clientSecret;
-
-
    //               Execução do processo               //
   //////////////////////////////////////////////////////
     var response = await execSQLWhiteSpace(`SELECT API_USUARIO, CLIENT_ID, CLIENT_SECRET, EMAIL FROM DL_APIS_USUARIOS WHERE SITUACAO = 'Ativo' AND CLIENT_ID = '${clientId}' AND CLIENT_SECRET = '${clientSecret}'`);
-    // console.log(response);
-    // console.log(`SELECT API_USUARIO, CLIENT_ID, CLIENT_SECRET, EMAIL FROM DL_API_USUARIOS WHERE SITUACAO = 'Ativo' AND CLIENT_ID = '${clientId}' AND CLIENT_SECRET = '${clientSecret}'`);
     
 
    //               Verificação de retorno             //

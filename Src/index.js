@@ -12,6 +12,7 @@ app.use(bodyParser.json())
 ///////////////////////////////////////////////////////////////////////////
 const swaggerUi = require('swagger-ui-express')
 const swaggerFile = require('../swagger_output.json')
+// const swaggerFile = require('../swagger_documentation.json')
 
 app.use('/api/document', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
@@ -94,6 +95,8 @@ app.use('/api/drogaleste/delivery/events', ativmobRomaneios);
 //////////////////////// Load routes maintenance //////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 app.get('/api/drogaleste/about', (req, res, next) => {
+	// #swagger.tags = ['User']
+	// #swagger.description = 'Endpoint para obter um usuário.'
 	let endpoints = listEndpoints(app);
 	console.log(endpoints.path)
     res.status(200).send(endpoints);

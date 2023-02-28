@@ -37,6 +37,22 @@ const reportLog = require('../../Services/Functions/reportLog');
 //////////////////////////////////////////////////////////////
 router.get('/stock/refresh/:cod', verifyJWT, async (req, res, next) => {     
 
+  /* DEFINIÇÕES DE DOCUMENTAÇÕES
+    #swagger.tags = ['Produto']
+    #swagger.description = 'Obtem array de produtos que sofreram alteração de estoque na data atual'
+    swagger.parameters['cod'] = { 
+                                    in: 'headers', 
+                                    type: 'integer', 
+                                    description: 'código do cliente.', 
+                                    required: true
+                                  }
+    swagger.responses[200] = { 
+                                schema: { $ref: "#/definitions/Cliente/purchasehistoric" },
+                                description: 'Usuário encontrado.'
+                              }
+                               
+  */
+
   reportLog(`Usário:     ${req.email}`);
   reportLog(`Rota:       ${req.method}${req.originalUrl}`);
 
@@ -74,6 +90,28 @@ router.get('/stock/refresh/:cod', verifyJWT, async (req, res, next) => {
 //////////////////////////////////////////////////////////////
 router.get('/stock', verifyJWT, async (req, res, next) => {     
 
+  /* DEFINIÇÕES DE DOCUMENTAÇÕES
+    #swagger.tags = ['Produto']
+    #swagger.description = 'Obtem estoque do produto'
+     swagger.parameters['produto'] = { 
+                                    in: 'headers', 
+                                    type: 'integer', 
+                                    description: 'código do produto.', 
+                                    required: true
+                                  }
+     swagger.parameters['loja'] = { 
+                                    in: 'headers', 
+                                    type: 'integer', 
+                                    description: 'código da loja.', 
+                                    required: true
+                                  }
+    swagger.responses[200] = { 
+                                schema: { $ref: "#/definitions/Cliente/purchasehistoric" },
+                                description: 'Usuário encontrado.'
+                              }
+                               
+  */
+
   reportLog(`Usário:     ${req.email}`);
   reportLog(`Rota:       ${req.method}${req.originalUrl}`);
 
@@ -110,6 +148,28 @@ router.get('/stock', verifyJWT, async (req, res, next) => {
 ///////////////// RETORNA CARGA DE PRODUTOS //////////////////
 //////////////////////////////////////////////////////////////
 router.get('/charge', verifyJWT, async (req, res, next) => {   
+
+  /* DEFINIÇÕES DE DOCUMENTAÇÕES
+    #swagger.tags = ['Produto']
+    #swagger.description = 'Obtem array de cadastros de todos os produtos'
+     swagger.parameters['produto'] = { 
+                                    in: 'headers', 
+                                    type: 'integer', 
+                                    description: 'código do produto.', 
+                                    required: true
+                                  }
+     swagger.parameters['loja'] = { 
+                                    in: 'headers', 
+                                    type: 'integer', 
+                                    description: 'código da loja.', 
+                                    required: true
+                                  }
+    swagger.responses[200] = { 
+                                schema: { $ref: "#/definitions/Cliente/purchasehistoric" },
+                                description: 'Usuário encontrado.'
+                              }
+                               
+  */
 
   reportLog(`Usário:     ${req.email}`);
   reportLog(`Rota:       ${req.method}${req.originalUrl}`);
@@ -150,6 +210,28 @@ router.get('/charge', verifyJWT, async (req, res, next) => {
 //////////////////////////////////////////////////////////////
 router.get('/refreshregistration', verifyJWT, async (req, res, next) => {    
 
+  /* DEFINIÇÕES DE DOCUMENTAÇÕES
+    #swagger.tags = ['Produto']
+    #swagger.description = 'Obtem array de produtos que sofreram alteração de cadastro na data atual'
+     swagger.parameters['produto'] = { 
+                                    in: 'headers', 
+                                    type: 'integer', 
+                                    description: 'código do produto.', 
+                                    required: true
+                                  }
+     swagger.parameters['loja'] = { 
+                                    in: 'headers', 
+                                    type: 'integer', 
+                                    description: 'código da loja.', 
+                                    required: true
+                                  }
+    swagger.responses[200] = { 
+                                schema: { $ref: "#/definitions/Cliente/purchasehistoric" },
+                                description: 'Usuário encontrado.'
+                              }
+                               
+  */
+
   reportLog(`Usário:     ${req.email}`);
   reportLog(`Rota:       ${req.method}${req.originalUrl}`);
 
@@ -173,6 +255,28 @@ router.get('/refreshregistration', verifyJWT, async (req, res, next) => {
 ////////////////// RETORNA UM PRODUTO /////////////////////////
 //////////////////////////////////////////////////////////////
 router.get('/:cod', verifyJWT, async (req, res, next) => {   
+
+  /* DEFINIÇÕES DE DOCUMENTAÇÕES
+    #swagger.tags = ['Produto']
+    #swagger.description = 'Obtem detalhes do cadastro de um produto'
+     swagger.parameters['produto'] = { 
+                                    in: 'headers', 
+                                    type: 'integer', 
+                                    description: 'código do produto.', 
+                                    required: true
+                                  }
+     swagger.parameters['loja'] = { 
+                                    in: 'headers', 
+                                    type: 'integer', 
+                                    description: 'código da loja.', 
+                                    required: true
+                                  }
+    swagger.responses[200] = { 
+                                schema: { $ref: "#/definitions/Cliente/purchasehistoric" },
+                                description: 'Usuário encontrado.'
+                              }
+                               
+  */
 
   reportLog(`Usário:     ${req.email}`);
   reportLog(`Rota:       ${req.method}${req.originalUrl}`);
