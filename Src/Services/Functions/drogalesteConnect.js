@@ -26,6 +26,7 @@ async function execSQLDrogalesteQuery(script, res){
                 if(messageError){
                     var error = {
                         code: 500,
+                        status: 0,
                         message: 'Erro ao retornar dados',
                         ex: messageError.code
                     }
@@ -59,6 +60,7 @@ async function execSQLDrogalesteQuery(script, res){
             }else{
                 var error = {
                     code: 404,
+                    status: 0,
                     message: 'Nenhum dado encontrado',
                     ex: 'Sua requisição não retornou nenhuma dado'
                 }
