@@ -254,7 +254,7 @@ router.get('/refreshregistration', verifyJWT, async (req, res, next) => {
 //////////////////////////////////////////////////////////////
 router.get('/:cod', verifyJWT, async (req, res, next) => {   
 
-  const {cod} = req.params.cod;
+  const {cod} = req.params;
 
   /* DEFINIÇÕES DE DOCUMENTAÇÕES
     #swagger.tags = ['Produto']
