@@ -38,6 +38,8 @@ router.get('/purchasehistoric/:cod', verifyJWT, async (req, res, next) => {
 //RETORNA HISTÓRICO DE COMPRAS
 router.get('/:cod', verifyJWT, async (req, res, next) => {   
 
+  const {cod} = req.params;
+
   /* DEFINIÇÕES DE DOCUMENTAÇÕES
     #swagger.tags = ['Cliente']
     #swagger.description = 'Obtem informações de um cliente de acordo com os parametros informados.'
@@ -59,12 +61,27 @@ router.get('/:cod', verifyJWT, async (req, res, next) => {
 
    //               Verificação de parametros          //
   //////////////////////////////////////////////////////
-  if(!req.params.cod)
+  if(!cod) // Verifica se o parametro foi informado
   {
     let error = {
       code: 400,
-      message: 'Erro na geração do token',
+      message: 'Erro na identificação dos parametros',
       ex: 'Existem parametros que não foram informados!',
+    }    
+
+    res.status(400).send(error);
+    reportLog(`Ex:         Erro na definição dos parametros`);
+    console.log('');
+
+    return;
+  }
+
+  if(!parseInt(cod)) // Verifica se o parametro é numérico
+  {
+    let error = {
+      code: 400,
+      message: 'Erro na validação dos parametros',
+      ex: 'O parametro informado não foi reconhecido como valor numérico',
     }    
 
     res.status(400).send(error);
@@ -76,7 +93,7 @@ router.get('/:cod', verifyJWT, async (req, res, next) => {
 
    //       Declaração/Validação de parametros         //
   //////////////////////////////////////////////////////  
-  let cliente = req.params.cod;
+  let cliente = cod;
 
    //               Execução do processo               //
   //////////////////////////////////////////////////////
