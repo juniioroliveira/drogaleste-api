@@ -251,7 +251,7 @@ reportLog(`Parametro:  *{promocao: ${cod}}`);
 
    //               Execução do processo               //
   //////////////////////////////////////////////////////
-  await execSQLDrogaleste(`EXEC API_PROMOTIONS_TYPE_GET ${promocao}`, res);
+  await execSQLDrogaleste(`EXEC API_PROMOTIONS_TYPE_GET ${cod}`, res);
 });
   
 module.exports = router;
