@@ -71,11 +71,11 @@ async function execSQLDrogalesteQuery(script, res){
                 res.status(404).send(error);
             }
                 }
-        ).catch(async error =>  {
+        ).catch(async err =>  {
             var error = {
                 code: 500,
                 message: 'Erro ao retornar dados',
-                ex: messageError.code
+                ex: err
             }
 
             reportLog(`Code:       ${error.code}`)
