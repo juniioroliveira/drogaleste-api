@@ -71,20 +71,7 @@ async function execSQLDrogalesteQuery(script, res){
                 res.status(404).send(error);
             }
                 }
-        ).catch(async err =>  {
-            var error = {
-                code: 500,
-                message: 'Erro ao retornar dados',
-                ex: err
-            }
-
-            reportLog(`Code:       ${error.code}`)
-            reportLog(`Message:    ${error.message}`)
-            reportLog(`Ex:         ${error.ex}`)        
-            console.log('');
-
-            res.status(500).send(error);
-        });;
+        );
 }
 
 module.exports = execSQLDrogalesteQuery;
