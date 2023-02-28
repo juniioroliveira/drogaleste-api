@@ -20,7 +20,6 @@ async function execSQLDrogalesteQuery(script, res){
                                 .query(script)
                                 .then(async content => messageSucess = await content.recordset[0].res)
                                 .catch(async err =>  messageError = await err);
-                                console.log(messageError);
                                 if(response){
                                     
                                     if(messageError){
@@ -40,6 +39,8 @@ async function execSQLDrogalesteQuery(script, res){
                                     
                                     if(messageSucess){
                                         
+                                        console.log(messageSucess);
+                                        
                                         var error = {
                                             code: 200,
                                             message: 'Dados retornados com sucesso'
@@ -51,6 +52,7 @@ async function execSQLDrogalesteQuery(script, res){
     
                                         res.status(200).send(JSON.parse(messageSucess))
                                     }
+
                                 }else{
                                     var error = {
                                         code: 404,
