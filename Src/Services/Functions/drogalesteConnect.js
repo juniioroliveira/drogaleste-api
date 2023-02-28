@@ -26,7 +26,6 @@ async function execSQLDrogalesteQuery(script, res){
                 if(messageError){
                     var error = {
                         code: 500,
-                        status: 0,
                         message: 'Erro ao retornar dados',
                         ex: messageError.code
                     }
@@ -41,19 +40,14 @@ async function execSQLDrogalesteQuery(script, res){
                 
                 if(messageSucess){
                     
-                    // console.log(messageSucess);
-                    
                     var error = {
                         code: 200,
-                        status: 1,
                         message: 'Dados retornados com sucesso'
                     }
 
                     reportLog(`Code:       ${error.code}`)
                     reportLog(`Message:    ${error.message}`) 
                     console.log('');
-
-                    // console.log(messageSucess);
                     
                     res.status(200).send(JSON.parse(messageSucess))
                 }
@@ -61,7 +55,6 @@ async function execSQLDrogalesteQuery(script, res){
             }else{
                 var error = {
                     code: 404,
-                    status: 0,
                     message: 'Nenhum dado encontrado',
                     ex: 'Sua requisição não retornou nenhuma dado'
                 }
