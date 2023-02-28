@@ -157,7 +157,7 @@ router.get('/stock', verifyJWT, async (req, res, next) => {
       }    
   
       res.status(400).send(error);
-      reportLog(`Ex:       Erro na definição dos parametros`);
+      reportLog(`Ex:         O parametro *pageNumber informado não foi reconhecido como valor numérico`);
       console.log('');
   
       return;
@@ -175,7 +175,7 @@ router.get('/stock', verifyJWT, async (req, res, next) => {
       }    
   
       res.status(400).send(error);
-      reportLog(`Ex:       Erro na definição dos parametros`);
+      reportLog(`Ex:         O parametro *pageRows informado não foi reconhecido como valor numérico`);
       console.log('');
   
       return;
@@ -199,6 +199,7 @@ router.get('/stock', verifyJWT, async (req, res, next) => {
 ///////////////// RETORNA CARGA DE PRODUTOS //////////////////
 //////////////////////////////////////////////////////////////
 router.get('/charge', verifyJWT, async (req, res, next) => {   
+  const {pagenumber, pagerows} = req.headers;
 
   /* DEFINIÇÕES DE DOCUMENTAÇÕES
     #swagger.tags = ['Produto']
@@ -227,7 +228,7 @@ router.get('/charge', verifyJWT, async (req, res, next) => {
 
    //               Verificação de parametros          //
   //////////////////////////////////////////////////////
-  if(!req.headers.pagenumber || !req.headers.pagerows)
+  if(!pagenumber || !pagerows)
   {
     let error = {
       code: 400,
@@ -242,11 +243,47 @@ router.get('/charge', verifyJWT, async (req, res, next) => {
     return;
   }
 
+  if(pagenumber ) // Verifica se o parametro é numérico
+  {
+    if(!parseInt(pagenumber))
+    {
+      let error = {
+        code: 400,
+        message: 'Erro na paginação',
+        ex: 'O parametro *pageNumber informado não foi reconhecido como valor numérico',
+      }    
+  
+      res.status(400).send(error);
+      reportLog(`Ex:         O parametro *pageNumber informado não foi reconhecido como valor numérico`);
+      console.log('');
+  
+      return;
+    }
+  }
+
+  if(pagerows ) // Verifica se o parametro é numérico
+  {
+    if(!parseInt(pagerows))
+    {
+      let error = {
+        code: 400,
+        message: 'Erro na paginação',
+        ex: 'O parametro *pageRows informado não foi reconhecido como valor numérico',
+      }    
+  
+      res.status(400).send(error);
+      reportLog(`Ex:         O parametro *pageRows informado não foi reconhecido como valor numérico`);
+      console.log('');
+  
+      return;
+    }
+  }
+
    //       Declaração/Validação de parametros         //
   //////////////////////////////////////////////////////   
 
-  let pagenumber = req.headers.pagenumber;
-  let pagerows = req.headers.pagerows;
+  // let pagenumber = req.headers.pagenumber;
+  // let pagerows = req.headers.pagerows;
   reportLog(`Parametro:  *{pageNumber: ${pagenumber}, pageRows: ${pagerows}}`);
 
    //               Execução do processo               //
