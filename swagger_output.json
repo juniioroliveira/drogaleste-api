@@ -61,7 +61,7 @@
     },
     "petstore_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://petstore.swagger.io/oauth/authorize",
+      "authorizationUrl": "http://apidrogaleste.ddns.net:7150/api/oauth",
       "flow": "implicit",
       "scopes": {
         "read_pets": "read your pets",
@@ -90,7 +90,7 @@
         }
       }
     },
-    "/api/oauth2/": {
+    "/api/oauth/": {
       "post": {
         "tags": [
           "Autenticação"
@@ -372,6 +372,16 @@
             "type": "string"
           },
           {
+            "name": "pagenumber",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "pagerows",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "authorization",
             "in": "header",
             "type": "string"
@@ -434,7 +444,12 @@
         "description": "Obtem array de produtos que sofreram alteração de cadastro na data atual",
         "parameters": [
           {
-            "name": "loja",
+            "name": "pagenumber",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "pagerows",
             "in": "header",
             "type": "string"
           },
@@ -445,6 +460,9 @@
           }
         ],
         "responses": {
+          "400": {
+            "description": "Solicitação Inválida"
+          },
           "401": {
             "description": "Não autorizado"
           },
@@ -491,34 +509,6 @@
         }
       }
     },
-    "/api/drogaleste/store/{cod}": {
-      "get": {
-        "tags": [
-          "Loja"
-        ],
-        "description": "Obtem detalhes de uma loja ",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "cod",
-            "in": "path",
-            "description": "Código da loja",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/api/drogaleste/store/": {
       "get": {
         "tags": [
@@ -527,12 +517,25 @@
         "description": "Obtem array de lojas ",
         "parameters": [
           {
+            "name": "loja",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "matriz",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "authorization",
             "in": "header",
             "type": "string"
           }
         ],
         "responses": {
+          "400": {
+            "description": "Solicitação Inválida"
+          },
           "401": {
             "description": "Não autorizado"
           },
@@ -550,12 +553,22 @@
         "description": "Obtem array de produtos da promoção recorrente informada ",
         "parameters": [
           {
-            "name": "promocao",
+            "name": "promotion",
             "in": "header",
             "type": "string"
           },
           {
-            "name": "loja",
+            "name": "store",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "pagenumber",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "pagerows",
             "in": "header",
             "type": "string"
           },
@@ -586,35 +599,7 @@
         "description": "Obtem array dos tipos de promoções",
         "parameters": [
           {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "401": {
-            "description": "Não autorizado"
-          },
-          "403": {
-            "description": "Acesso Negado"
-          }
-        }
-      }
-    },
-    "/api/drogaleste/promotions/suggested": {
-      "get": {
-        "tags": [
-          "Promoção"
-        ],
-        "description": "Obtem array de promoções vigentes de um produto",
-        "parameters": [
-          {
-            "name": "produto",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "loja",
+            "name": "campaign",
             "in": "header",
             "type": "string"
           },
@@ -637,17 +622,21 @@
         }
       }
     },
-    "/api/drogaleste/promotions/{cod}": {
+    "/api/drogaleste/promotions/suggested": {
       "get": {
         "tags": [
           "Promoção"
         ],
-        "description": "Obtem detalhes de uma promoção especifica",
+        "description": "Obtem array de promoções vigentes de um produto",
         "parameters": [
           {
-            "name": "cod",
-            "in": "path",
-            "required": true,
+            "name": "product",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "store",
+            "in": "header",
             "type": "string"
           },
           {
@@ -677,12 +666,20 @@
         "description": "Obtem array dos tipos de promoções",
         "parameters": [
           {
+            "name": "promotion",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "authorization",
             "in": "header",
             "type": "string"
           }
         ],
         "responses": {
+          "400": {
+            "description": "Solicitação Inválida"
+          },
           "401": {
             "description": "Não autorizado"
           },
@@ -706,6 +703,16 @@
           },
           {
             "name": "movimento",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "pagenumber",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "pagerows",
             "in": "header",
             "type": "string"
           },

@@ -33,7 +33,9 @@ const reportLog = require('../../Services/Functions/reportLog');
 //////////////////////////////////////////////////////////////
 /////RETORNA LISTA DE ESTOQUE ALTERADO /////////////
 //////////////////////////////////////////////////////////////
-router.get('/stock/refresh/:cod', verifyJWT, async (req, res, next) => {     
+router.get('/stock/refresh/:loja', verifyJWT, async (req, res, next) => {     
+
+  const {loja, pagenumber, pagerows} = req.params;
 
   /* DEFINIÇÕES DE DOCUMENTAÇÕES
     #swagger.tags = ['Produto']
@@ -56,7 +58,7 @@ router.get('/stock/refresh/:cod', verifyJWT, async (req, res, next) => {
 
    //               Verificação de parametros          //
   //////////////////////////////////////////////////////
-  if(!req.params.cod)
+  if(!loja)
   {
     let error = {
       code: 400,
@@ -71,10 +73,48 @@ router.get('/stock/refresh/:cod', verifyJWT, async (req, res, next) => {
     return;
   }
 
+  if(pagenumber) // Verifica se o parametro é numérico
+  {
+    if(!parseInt(pagenumber))
+    {
+      let error = {
+        code: 400,
+        message: 'Erro na paginação',
+        ex: 'O parametro *pageNumber informado não foi reconhecido como valor numérico',
+      }    
+  
+      res.status(400).send(error);
+      reportLog(`Ex:         O parametro *pageNumber informado não foi reconhecido como valor numérico`);
+      console.log('');
+  
+      return;
+    }
+  }
+
+  if(pagerows) // Verifica se o parametro é numérico
+  {
+    if(!parseInt(pagerows))
+    {
+      let error = {
+        code: 400,
+        message: 'Erro na paginação',
+        ex: 'O parametro *pageRows informado não foi reconhecido como valor numérico',
+      }    
+  
+      res.status(400).send(error);
+      reportLog(`Ex:         O parametro *pageRows informado não foi reconhecido como valor numérico`);
+      console.log('');
+  
+      return;
+    }
+  }
+
    //       Declaração/Validação de parametros         //
   //////////////////////////////////////////////////////  
-  let loja = req.params.cod;
-  reportLog(`Parametro:  *{loja: ${loja}}`);
+  let pagina = pagenumber ? pagenumber : 'NULL'; 
+  let linhas = pagerows ? pagerows : 'NULL'; 
+
+  reportLog(`Parametro:  *{loja: ${loja}, pageNumber: ${pagina}, pageRows: ${linhas}`);
 
    //               Execução do processo               //
   //////////////////////////////////////////////////////
@@ -116,7 +156,7 @@ router.get('/stock', verifyJWT, async (req, res, next) => {
 
    //               Verificação de parametros          //
   //////////////////////////////////////////////////////
-  if(!produto || !loja)// Verifica se o parametro foi informado
+  if(!loja)// Verifica se o parametro foi informado
   {
     let error = {
       code: 400,
@@ -131,19 +171,21 @@ router.get('/stock', verifyJWT, async (req, res, next) => {
     return;
   }
 
-  if(!parseInt(produto) || !parseInt(loja)) // Verifica se o parametro é numérico
-  {
-    let error = {
-      code: 400,
-      message: 'Erro na validação dos parametros',
-      ex: 'O parametro informado não foi reconhecido como valor numérico',
-    }    
-
-    res.status(400).send(error);
-    reportLog(`Ex:       Erro na definição dos parametros`);
-    console.log('');
-
-    return;
+  if(produto){
+    if(!parseInt(produto) || !parseInt(loja)) // Verifica se o parametro é numérico
+    {
+      let error = {
+        code: 400,
+        message: 'Erro na validação dos parametros',
+        ex: 'O parametro informado não foi reconhecido como valor numérico',
+      }    
+  
+      res.status(400).send(error);
+      reportLog(`Ex:       Erro na definição dos parametros`);
+      console.log('');
+  
+      return;
+    }
   }
 
   if(pagenumber ) // Verifica se o parametro é numérico
