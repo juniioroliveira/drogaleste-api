@@ -69,7 +69,7 @@ router.get('/purchasehistoric/:client', verifyJWT, async (req, res, next) => {
 
    //               Execução do processo               //
   //////////////////////////////////////////////////////
-  await execSQLDrogaleste(`EXEC API_PURCHASE_HISTORIC_GET ${client}`, res);
+  await execSQLDrogaleste(`EXEC API_PURCHASE_HISTORIC_GET '${client}'`, res);
 });
   
 //RETORNA HISTÓRICO DE COMPRAS
