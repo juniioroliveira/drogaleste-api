@@ -145,42 +145,42 @@ router.post('/new', async (req, res, next) => {
               '    </div> ' +
               '    <div align="center" border="0" cellpadding="0" cellspacing="0" style="background-color:  #ffff;  align-items: center; padding-top: 10px; padding-bottom: 50px; "> ' +
               ' ' +
-              '        <div style="width: 500px; height: auto; background-color: whitesmoke;"> ' +
-              '            <div style="padding: 5px 10px;  ' +
-              '                        height: 30px;  ' +
-              '                        background-color: #0d4a8d;  ' +
-              '                        color: white;  ' +
-              '                        display: flex;  ' +
-              '                        align-items: center; ' +
-              '                        padding: 5px 10px; ' +
-              '                        font-size: 13px;"> ' +
-              '                <h4>Credenciais</h4> ' +
-              '            </div> ' +
-              ' ' +
-              '            <div style="display: grid; ' +
-              '                        grid-template-columns: 100px 390px; ' +
-              '                        grid-gap: 10px; ' +
-              '                        background-color: lightgray; "> ' +
-              '                <div style="color: black; padding: 5px 10px; text-align: right; font-size: 11px; font-weight: bold;"> ' +
-              '                    clientId: ' +
-              '                </div> ' +
-              '                <div style="background-color: whitesmoke; color: black; text-align: left;  word-wrap: break-word; padding: 5px; font-size: 11px;"> ' +
-              '                    agB1AG4AaQBvAHIAbwBsAGkAdgBlAGkAcgBhAC4AbABhAEAAaABvAHQAbQBhAGkAbAAuAGMAbwBtAA== ' +
-              '                </div> ' +
-              '            </div> ' +
-              ' ' +
-              '            <div style="display: grid; ' +
-              '                        grid-template-columns: 100px 390px; ' +
-              '                        grid-gap: 10px; ' +
-              '                        background-color: lightgray; "> ' +
-              '                <div style="background-color: lightgray; color: black; padding: 5px 10px; text-align: right; font-size: 11px; font-weight: bold;"> ' +
-              '                    clientSecret: ' +
-              '                </div> ' +
-              '                <div style="background-color: whitesmoke; color: black; text-align: left;  word-wrap: break-word; padding: 5px; font-size: 11px;"> ' +
-              '                    agB1AG4AaQBvAHIAbwBsAGkAdgBlAGkAcgBhAC4AbABhAEAAaABvAHQAbQBhAGkAbAAuAGMAbwBtAA== ' +
-              '                </div> ' +
-              '            </div> ' +
-              '        </div> ' +
+              '<div style="width: 500px; height: auto; background-color: whitesmoke;"> ' +
+              '<div style="padding: 5px 10px;  ' +
+              '            height: 30px;  ' +
+              '            background-color: #0d4a8d;  ' +
+              '            color: white;  ' +
+              '            display: flex;  ' +
+              '            align-items: center; ' +
+              '            padding: 5px 10px; ' +
+              '            font-size: 13px;"> ' +
+              '    <h4>Credenciais</h4> ' +
+              '</div> ' +
+              '<div style="padding: 5px 10px;  ' +
+              '            height: 30px;  ' +
+              '            color: black;  ' +
+              '            display: flex;  ' +
+              '            align-items: center; ' +
+              '            padding: 5px 10px; ' +
+              '            font-size: 13px;"> ' +
+              '    <h4>clientId:</h4> ' +
+              '</div> ' +
+              '<div style="background-color: #474747; color: white; text-align: left;  word-wrap: break-word; padding: 5px; font-size: 11px;"> ' +
+              '    <h4>agB1AG4AaQBvAHIAbwBsAGkAdgBlAGkAcgBhAC4AbABhAEAAaABvAHQAbQBhAGkAbAAuAGMAbwBtAA==</h4> ' +
+              '</div> ' +
+              '<div style="padding: 5px 10px;  ' +
+              '            height: 30px;  ' +
+              '            color: black;  ' +
+              '            display: flex;  ' +
+              '            align-items: center; ' +
+              '            padding: 5px 10px; ' +
+              '            font-size: 13px;"> ' +
+              '    <h4>clientSecret:</h4> ' +
+              '</div> ' +
+              '<div style="background-color: #474747; color: white; text-align: left;  word-wrap: break-word; padding: 5px; font-size: 11px;"> ' +
+              '    <h4>agB1AG4AaQBvAHIAbwBsAGkAdgBlAGkAcgBhAC4AbABhAEAAaABvAHQAbQBhAGkAbAAuAGMAbwBtAA==</h4> ' +
+              '</div> ' +
+              '</div>'  +
               '         ' +
               '    </div> ' +
               '    <div class="d-none d-lg-block"> ' +
