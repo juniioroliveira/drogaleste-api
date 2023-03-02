@@ -22,8 +22,6 @@ async function execSQLDrogalesteQuery(script, res){
                 .catch(async err =>  messageError = await err);
 
             if(response){
-
-                console.log(messageError)
                 
                 if(messageError){
                     var error = {
