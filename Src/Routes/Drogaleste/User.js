@@ -8,6 +8,8 @@ const notify = require('../../Services/Functions/sendMail')
 const {body, validationResult} = require('express-validator');
 const { Console } = require('console');
 
+const html = require('../../Homolog/email.html') 
+
 
 router.post('/new', async (req, res, next) => {  
   
@@ -218,10 +220,11 @@ router.post('/new', async (req, res, next) => {
               '     </div> ' +
               ' </div> ';
               
+              let teste = html; 
               let headerUsuario = {
                 emails: 'junioroliveira.la@hotmail.com',//email, // + ', junioroliveira.la@hotmail.com',
                 titulo: 'Drogaleste - Credenciais',
-                corpoMensagem: htmlUsuario
+                corpoMensagem: teste
               }              
               var sendUsuario = await notify(headerUsuario);
 
