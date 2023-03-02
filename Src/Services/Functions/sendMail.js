@@ -36,7 +36,7 @@ const transporter = nodemailer.createTransport({
             return false
         } else {        
                  
-            reportLog(`Status: Credenciais enviadas no e-mail`);                   
+            reportLog(`Status: Credenciais enviadas no e-mail ${mailOptions.to}`);                   
             return true;
         }
     });
