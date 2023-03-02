@@ -145,7 +145,7 @@ router.post('/new', async (req, res, next) => {
               '    </div> ' +
               '    <div align="center" border="0" cellpadding="0" cellspacing="0" style="background-color:  #ffff;  align-items: center; padding-top: 10px; padding-bottom: 50px; "> ' +
               ' ' +
-              '<div style="width: 500px; height: auto; background-color: whitesmoke;"> ' +
+              '<div style="width: 500px; height: auto;"> ' +
               '<div style="padding: 5px 10px;  ' +
               '            height: 30px;  ' +
               '            background-color: #0d4a8d;  ' +
@@ -165,7 +165,7 @@ router.post('/new', async (req, res, next) => {
               '            font-size: 13px;"> ' +
               '    <h4>clientId:</h4> ' +
               '</div> ' +
-              '<div style="background-color: #474747; color: white; text-align: left;  word-wrap: break-word; padding: 5px; font-size: 11px;"> ' +
+              '<div style="background-color: #474747; color: white; text-align: left;  word-wrap: break-word; padding: 5px;  font-size: 11px; font-family: Arial, sans-serif; font-weight: normal;"> ' +
               '    <h4>agB1AG4AaQBvAHIAbwBsAGkAdgBlAGkAcgBhAC4AbABhAEAAaABvAHQAbQBhAGkAbAAuAGMAbwBtAA==</h4> ' +
               '</div> ' +
               '<div style="padding: 5px 10px;  ' +
@@ -177,7 +177,7 @@ router.post('/new', async (req, res, next) => {
               '            font-size: 13px;"> ' +
               '    <h4>clientSecret:</h4> ' +
               '</div> ' +
-              '<div style="background-color: #474747; color: white; text-align: left;  word-wrap: break-word; padding: 5px; font-size: 11px;"> ' +
+              '<div style="background-color: #474747; color: white; text-align: left;  word-wrap: break-word; padding: 5px;  font-size: 11px; font-family: Arial, sans-serif; font-weight: normal;"> ' +
               '    <h4>agB1AG4AaQBvAHIAbwBsAGkAdgBlAGkAcgBhAC4AbABhAEAAaABvAHQAbQBhAGkAbAAuAGMAbwBtAA==</h4> ' +
               '</div> ' +
               '</div>'  +
