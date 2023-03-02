@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
     tls: {rejectUnauthorized: false}
 });
 
-
+ 
  async function sendMail(header){
     // reportLog(`Usuário autenticado: ${outlook.auth.user} *${header.emails}`);
     reportLog(`Enviando notificação para e-mail *${header.emails}`);
