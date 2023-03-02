@@ -24,7 +24,6 @@ async function execSQLDrogalesteQuery(script, res){
             if(response){
 
                 console.log(messageError)
-                console.log(messageSucess)
                 
                 if(messageError){
                     var error = {
@@ -52,6 +51,7 @@ async function execSQLDrogalesteQuery(script, res){
                     reportLog(`Message:    ${error.message}`) 
                     console.log('');
                     
+                    console.log(messageSucess)
                     res.status(200).send(JSON.parse(messageSucess))
                 }
 

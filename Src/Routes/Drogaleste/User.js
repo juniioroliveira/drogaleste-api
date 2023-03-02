@@ -61,6 +61,7 @@ router.post('/new', async (req, res, next) => {
           }
 
           var response = await execSQLDrogaleste(`EXEC API_NEW_USER_POST '${nome}', ${inscricaoFederal}, '${email}'`)
+          console.log(response);
 
 
           const {status} = response;
