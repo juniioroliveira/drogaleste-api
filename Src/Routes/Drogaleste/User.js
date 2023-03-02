@@ -149,7 +149,7 @@ router.post('/new', async (req, res, next) => {
               var sendUsuario = await notify(headerUsuario);
 
 
-              let client = JSON.parse(response).clientId;
+              // let client = JSON.parse(response).clientId;
 
               // let htmlCopy = 
               // `<h2>API Drogaleste</h2>` +
@@ -169,7 +169,8 @@ router.post('/new', async (req, res, next) => {
             
             // }
             
-            res.status(200).send({ cod: 200, message: JSON.parse(response).mensagem});
+            // res.status(200).send({ cod: 200, message: JSON.parse(response).mensagem});
+            res.status(200).send('OK');
               
             reportLog(`Status: Retornou com exito`);
           }else{
