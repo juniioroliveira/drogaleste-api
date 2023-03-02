@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
         pass: outlook.auth.pass
     },
     tls: {rejectUnauthorized: false}
-});
+}); 
 
  
  async function sendMail(header){
