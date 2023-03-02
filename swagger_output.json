@@ -258,7 +258,7 @@
         }
       }
     },
-    "/api/drogaleste/client/purchasehistoric/{cod}": {
+    "/api/drogaleste/client/purchasehistoric/{client}": {
       "get": {
         "tags": [
           "Cliente"
@@ -266,7 +266,7 @@
         "description": "Obtem todas as alterações de cadastro de clientes na data atual.",
         "parameters": [
           {
-            "name": "cod",
+            "name": "client",
             "in": "path",
             "required": true,
             "type": "string"
@@ -278,8 +278,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "400": {
+            "description": "Solicitação Inválida"
           },
           "401": {
             "description": "Não autorizado"
@@ -322,7 +322,7 @@
         }
       }
     },
-    "/api/drogaleste/product/stock/refresh/{cod}": {
+    "/api/drogaleste/product/stock/refresh/{loja}": {
       "get": {
         "tags": [
           "Produto"
@@ -330,7 +330,7 @@
         "description": "Obtem array de produtos que sofreram alteração de estoque na data atual",
         "parameters": [
           {
-            "name": "cod",
+            "name": "loja",
             "in": "path",
             "required": true,
             "type": "string"
