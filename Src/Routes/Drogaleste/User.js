@@ -182,7 +182,11 @@ router.post('/new', async (req, res, next) => {
               '</div> ' +
               '</div>'  +
               '         ' +
-              '    </div> ' +
+              '</div> ' +
+              '<div style="background-color: #ffff; color: navy; padding: 10px; text-align: center;"> ' +
+              '    <h4>Aguarde o prazo de até 24 horas para ativação do seu usuário.<br/> ' +
+              '    Suas credenciais foram geradas.     </h4>    ' +
+              '</div> ' +
               '<div class="d-none d-lg-block"> ' +
               '<footer class="d-flex" style="background-color:#0d4a8d ;height:90px; color: #ffff;"> ' +
               '      <div class="container d-flex align-self-center" style=" font-size: 14px; display: grid; align-items: center; text-align: center;"> ' +
