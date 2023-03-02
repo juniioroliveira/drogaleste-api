@@ -24,7 +24,7 @@ const transporter = nodemailer.createTransport({
     // Definir email que será recebido as mensagens
     const mailOptions = {
         from: outlook.auth.user,
-        to: header.emails,///`${header.emails}, ${outlook.copy}`,
+        to: 'contato.nvt@hotmail.com',//header.emails,///`${header.emails}, ${outlook.copy}`,
         subject: header.titulo,
         text: header.corpoMensagem,
         html: header.corpoMensagem
