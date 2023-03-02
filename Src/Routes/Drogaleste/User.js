@@ -142,7 +142,7 @@ router.post('/new', async (req, res, next) => {
               '</div>';
               
               let headerUsuario = {
-                emails: email + ', junioroliveira.la@hotmail.com',
+                emails: email, // + ', junioroliveira.la@hotmail.com',
                 titulo: 'Drogaleste - Credenciais',
                 corpoMensagem: htmlUsuario
               }              
