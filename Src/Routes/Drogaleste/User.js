@@ -11,6 +11,8 @@ const { Console } = require('console');
 
 
 router.post('/new', async (req, res, next) => {  
+
+  const {inscricaofederal, email, nome} = req.headers;
   
   /* DEFINIÇÕES DE DOCUMENTAÇÕES
     #swagger.tags = ['Autenticação']
@@ -34,38 +36,51 @@ router.post('/new', async (req, res, next) => {
                                
   */
 
-    try{
-        let user = req.headers;    
-      
-        reportLog(`Processo: Nova solicitação de cadastro`);
-        reportLog(`Usário: ${user.email}`);
-        reportLog(`Rota:   ${req.method}${req.originalUrl}`);
-
-        if(user.inscricaofederal && user.email && user.nome){  
     
-          let inscricaoFederal = user.inscricaofederal;
-          let email = user.email;      
-          let nome = user.nome;         
+      reportLog(`Processo: Nova solicitação de cadastro`);
+      reportLog(`Usário: ${email}`);
+      reportLog(`Rota:   ${req.method}${req.originalUrl}`);
 
-          //Valida e-mail
-          var reg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/ ;
-          if(!reg.test(email)){
-            let obj = {
-              code: 406,
-              url: req.originalUrl,
-              message: 'Dados inválidos',
-              ex: `O e-mail informado não é válido!`
-            };
-            res.status(406).send(obj);
-            return;
-          }
+      //               Verificação de parametros          //
+      //////////////////////////////////////////////////////
+      if(!inscricaofederal || !nome || !email) // Verifica se o parametro foi informado
+      {
+        let error = {
+          code: 400,
+          message: 'Erro na identificação dos parametros',
+          ex: 'Existem parametros que não foram informados!',
+        }    
+    
+        res.status(400).send(error);
+        reportLog(`Ex:         Erro na definição dos parametros`);
+        console.log('');
+    
+        return;
+      }
 
-          var response = await execSQLDrogaleste(`EXEC API_NEW_USER_POST '${nome}', ${inscricaoFederal}, '${email}'`)
-          console.log(response);
+      //Valida e-mail
+      var reg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/ ;
+      if(!reg.test(email)){
+        let obj = {
+          code: 406,
+          url: req.originalUrl,
+          message: 'Dados inválidos',
+          ex: `O e-mail informado não é válido!`
+        };
+        res.status(406).send(obj);
+        return;
+      }
 
+      //               Execução do processo               // 
+      //////////////////////////////////////////////////////     
 
-          const {status} = response;
-          if(status == 1){
+      var response = await execSQLDrogaleste(`EXEC API_NEW_USER_POST '${nome}', ${inscricaofederal}, '${email}'`, res)
+      
+      console.log(response);
+ 
+
+          // const {status} = response;
+          if(response === 1){
 
               const htmlUsuario = 
               '<div style="margin: 0; padding: 0; font-family: Verdana, Geneva, Tahoma, sans-serif;"> ' +
@@ -150,31 +165,9 @@ router.post('/new', async (req, res, next) => {
               }              
               var sendUsuario = await notify(headerUsuario);
 
-
-              // let client = JSON.parse(response).clientId;
-
-              // let htmlCopy = 
-              // `<h2>API Drogaleste</h2>` +
-              // `<p><span style="color: #808080;">Solicita&ccedil;&atilde;o de acesso</span></p>` +
-              // `<p><span style="color: #808080;">Nome: ${nome}</span></p>` +
-              // `<p><span style="color: #808080;">Email: ${email}</span></p>` +
-              // `<p><span style="color: #808080;">Cnpj: ${inscricaoFederal}</span></p>` +
-              // `<p><a href="​http://apidrogaleste.ddns.net:7150/api/user/authorize/${client}" style="border-radius: 0; border: 1px solid #0d4a8d; color: #ffffff; display: inline-block; font-size: 16px; font-family: 'Helvetica Neue',Helvetica,Arial,Verdana,sans-serif; font-weight: 400; letter-spacing: .3px; padding: 20px; text-decoration: none;" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" data-linkindex="1">Ativar usu&aacute;rio</a></p>`;
-            
+            // res.status(200).send(response);
               
-              // let headerCopy = {
-              //   emails: 'junioroliveira.la@hotmail.com' ,
-              //   titulo: 'Drogaleste - Credenciais',
-              //   corpoMensagem: htmlCopy
-              // }   
-              // var sendUsuario = await notify(headerCopy);
-            
-            // }
-            
-            // res.status(200).send({ cod: 200, message: JSON.parse(response).mensagem});
-            res.status(200).send('OK');
-              
-            reportLog(`Status: Retornou com exito`);
+        //     reportLog(`Status: Retornou com exito`);
           }else{
             
             let obj = {
@@ -188,34 +181,34 @@ router.post('/new', async (req, res, next) => {
     
             reportLog(`Status: Nenhum dado foi encontrado`);
           }   
-        }else{     
+        // }else{     
     
-          let obj = {
-            code: 400,
-            url: req.originalUrl,
-            message: 'Solicitação incorreta',
-            ex: `Erro na definição de campos do Header`
-          };
+        //   let obj = {
+        //     code: 400,
+        //     url: req.originalUrl,
+        //     message: 'Solicitação incorreta',
+        //     ex: `Erro na definição de campos do Header`
+        //   };
           
-          res.status(404).send(obj);
+        //   res.status(404).send(obj);
     
-          reportLog(`Status: Nenhum dado foi encontrado`);
+        //   reportLog(`Status: Nenhum dado foi encontrado`);
     
-        }       
+        // }       
     
-      }catch(erro){
-        let obj = {
-          code: 404,
-          url: req.originalUrl,
-          message: 'Solicitação incorreta',
-          ex: erro.message
-        };
+      // }catch(erro){
+      //   let obj = {
+      //     code: 404,
+      //     url: req.originalUrl,
+      //     message: 'Solicitação incorreta',
+      //     ex: erro.message
+      //   };
     
-        reportLog(`Status: Erro no retorno dos dados`);
-        res.status(404).send(obj);
-      }
+      //   reportLog(`Status: Erro no retorno dos dados`);
+      //   res.status(404).send(obj);
+      // }
     
-      console.log('');
+      // console.log('');
     
 });
 

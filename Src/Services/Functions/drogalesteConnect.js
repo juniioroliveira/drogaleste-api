@@ -11,7 +11,7 @@ async function execSQLDrogalesteQuery(script, res){
                                         item.user     === 'procfit.drogaleste'); 
     
     let messageSucess;
-    let messageError;
+    let messageError; 
     let response;
     
     sql.connect(strConn)
@@ -21,7 +21,9 @@ async function execSQLDrogalesteQuery(script, res){
                 .then(async content => messageSucess = await content.recordset[0].res)
                 .catch(async err =>  messageError = await err);
 
+
             if(response){
+
                 
                 if(messageError){
                     var error = {
@@ -48,9 +50,8 @@ async function execSQLDrogalesteQuery(script, res){
                     reportLog(`Code:       ${error.code}`)
                     reportLog(`Message:    ${error.message}`) 
                     console.log('');
-                    
-                    console.log(messageSucess)
-                    res.status(200).send(JSON.parse(messageSucess))
+
+                    res.status(200).send(JSON.parse(messageSucess));
                 }
 
             }else{
@@ -69,6 +70,7 @@ async function execSQLDrogalesteQuery(script, res){
             }
                 }
         );
+
 }
 
 module.exports = execSQLDrogalesteQuery;
