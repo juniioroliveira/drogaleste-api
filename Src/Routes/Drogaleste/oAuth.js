@@ -77,6 +77,7 @@ router.post('/', async (req, res, next) => {
    //               Verificação de parametros          //
   //////////////////////////////////////////////////////
    const {clientId, clientSecret} = req.body  
+  //  console.log(req.body);
 
     if(!clientId || !clientSecret)
     {
