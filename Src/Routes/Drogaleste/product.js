@@ -118,7 +118,7 @@ router.get('/stock/refresh/:loja', verifyJWT, async (req, res, next) => {
 
    //               Execução do processo               //
   //////////////////////////////////////////////////////
-  await execSQLDrogaleste(`EXEC API_PRODUCT_STOCK_GET NULL, ${loja}, 'S'`, res);
+  await execSQLDrogaleste(`EXEC API_PRODUCT_STOCK_GET NULL, ${loja}, 'S', ${pagina}, ${linhas}`, res);
 
 }); 
 
